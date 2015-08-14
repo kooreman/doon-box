@@ -1,0 +1,253 @@
+<header id="header" data-ng-include src="'includes/header.html'" data-ng-controller="headerCtrl as hctrl"></header>
+
+<section id="main">
+    <aside id="sidebar" data-ng-controller="sideBarCtrl" data-ng-include src="'includes/sidebar-left.html'" data-ng-class="{ 'toggled': app.sidebarToggle.left === true }"></aside>
+
+    <!-- <aside id="chat" data-ng-include src="'includes/chat.html'" data-ng-class="{ 'toggled': app.sidebarToggle.right === true }"></aside> -->
+
+    <section id="content">
+        <div class="container" ng-controller="MissionCtrl">
+            <div class="block-header">
+                <h2><a data-ui-sref="project({teamId: authUser.team, projectId : project.$id})" data-ng-click="app.sidebarStat($event)">{{ project.name }}</a> / Missie</h2>
+            </div>
+
+
+            <div id="mission" class="row" >
+
+                <div class="col-sm-12 col-md-8">
+
+                    <accordion close-others="oneAtATime">
+
+
+                        <accordion-group is-open="status.openStep1" heading="Stap 1: Uitleg">
+                            <p>In deze stap stel je jouw missie op. Jouw missie beschrijft wie je bent. Jouw missie beschrijft wie je bent, terwijl de wereld veranderd, zoals je in je visie beschreven hebt.</p>
+                            <h3>Hoe stel je je missie op?</h3>
+                            <ol>
+                                <li>Kies de zes kernwaarden die jij het belangrijkste vind van het 23plusone stickervel (DOON Ignition box) of hieronder in stap 2. Plaats de belangrijkste waarden bovenin. De basis waarden onderin.</li>
+                                <li>In stap 3 maak je voor groepjes van 3 waarden een zin, die bijvoorbeeld begint met <i>Ik ben ...</i> of <i>Wij zijn...</i>.
+                                    Dit doe je voor de eerste drie kernwaarden, maar ook voor 2 andere groepen van drie kernwaarden. Sommige kernwaarden gebruik je dus meer dan een keer in een zin.</li>
+                                <li>In stap 4 voeg je de drie zinnen samen. Schrijf je missie op, en begin met "Ik bied", "Ik zorg voor", "Ik help bij". Schrijf deze zo op dat je deze gemakkelijk kan vertellen aan anderen.</li>
+                            </ol>
+
+
+                            <button class="pull-right btn btn-info" data-ng-click="status.openStep1 = false; status.openStep2 = true;">Volgende stap <i class="zmdi zmdi-arrow-right"></i></button>
+                        </accordion-group>
+                        <accordion-group is-open="status.openStep2" heading="Stap 2: Jullie kernwaardepiramide">
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-3 col-md-offset-4 valuecard">
+                                        <img data-ng-if="project.missionCard1" class="valueCardImg" src="modules/team/partial/mission/images/23plusone2012_voorkant{{ project.missionCard1 }}.jpg">
+                                        <select ng-change="updateAvailableCards()" id="project.missionCard1" name="missionCard1" ng-model="project.missionCard1" class="form-control" required>
+                                            <option data-ng-repeat="c in valueCards" value="{{ c.id }}">{{ c.name.name }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-3 col-md-offset-2 valuecard">
+                                        <img data-ng-if="project.missionCard2" class="valueCardImg" src="modules/team/partial/mission/images/23plusone2012_voorkant{{ project.missionCard2 }}.jpg">
+                                        <select ng-change="updateAvailableCards()" id="project.missionCard2" name="missionCard2" ng-model="project.missionCard2" class="form-control" required>
+                                            <option data-ng-repeat="c in valueCards" value="{{ c.id }}">{{ c.name.name }}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 col-md-offset-1 valuecard">
+                                        <img data-ng-if="project.missionCard3" class="valueCardImg" src="modules/team/partial/mission/images/23plusone2012_voorkant{{ project.missionCard3 }}.jpg">
+                                        <select ng-change="updateAvailableCards()" id="project.missionCard3" name="missionCard3" ng-model="project.missionCard3" class="form-control" required>
+                                            <option data-ng-repeat="c in valueCards" value="{{ c.id }}">{{ c.name.name }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-3 valuecard">
+                                        <img data-ng-if="project.missionCard4" class="valueCardImg" src="modules/team/partial/mission/images/23plusone2012_voorkant{{ project.missionCard4 }}.jpg">
+                                        <select ng-change="updateAvailableCards()" id="project.missionCard4" name="missionCard4" ng-model="project.missionCard4" class="form-control" required>
+                                            <option data-ng-repeat="c in valueCards" value="{{ c.id }}">{{ c.name.name }}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 col-md-offset-1 valuecard">
+                                        <img data-ng-if="project.missionCard5" class="valueCardImg" src="modules/team/partial/mission/images/23plusone2012_voorkant{{ project.missionCard5 }}.jpg">
+                                        <select ng-change="updateAvailableCards()" id="project.missionCard5" name="missionCard5" ng-model="project.missionCard5" class="form-control" required>
+                                            <option data-ng-repeat="c in valueCards" value="{{ c.id }}">{{ c.name.name }}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 col-md-offset-1 valuecard">
+                                        <img data-ng-if="project.missionCard6" class="valueCardImg" src="modules/team/partial/mission/images/23plusone2012_voorkant{{ project.missionCard6 }}.jpg">
+                                        <select ng-change="updateAvailableCards()" id="project.missionCard6" name="missionCard6" ng-model="project.missionCard6" class="form-control" required>
+                                            <option data-ng-repeat="c in valueCards" value="{{ c.id }}">{{ c.name.name }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <button class="pull-right btn btn-info" data-ng-click="saveProject(project); status.openStep2 = false; status.openStep3 = true;">Volgende stap <i class="zmdi zmdi-arrow-right"></i></button>
+
+                            </form>
+
+
+                        </accordion-group>
+                        <accordion-group is-open="status.openStep3" heading="Stap 3: Waarde zinnen">
+                            <h3>Waarde zinnen</h3>
+                            <form>
+                                <div class="form-group">
+                                    <label for="vision2">Jullie visie</label>
+                                    <div id="vision2" class="well">{{ project.vision }}</div>
+                                </div>
+
+
+                                <h4>Eerste zin</h4>
+                                <div class="form-group">
+                                    <label for="cards1">Waardekaarten voor deze zin</label>
+
+                                    <div class="row" id="cards1">
+                                        <div class="row">
+                                            <div class="col-md-3 col-md-offset-4 valuecard">
+                                                <img data-ng-if="project.missionCard1" class="valueCardImg" src="modules/team/partial/mission/images/23plusone2012_voorkant{{ project.missionCard1 }}.jpg">
+                                                <!--<div>{{ valueCardById(project.missionCard1).name.name }}</div>-->
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3 col-md-offset-2 valuecard">
+                                                <img data-ng-if="project.missionCard2" class="valueCardImg" src="modules/team/partial/mission/images/23plusone2012_voorkant{{ project.missionCard2 }}.jpg">
+                                                <!--<div>{{ valueCards[project.missionCard2].name.name }}</div>-->
+                                            </div>
+                                            <div class="col-md-3 col-md-offset-1 valuecard">
+                                                <img data-ng-if="project.missionCard3" class="valueCardImg" src="modules/team/partial/mission/images/23plusone2012_voorkant{{ project.missionCard3 }}.jpg">
+                                                <!--<div>{{ valueCards[project.missionCard3].name.name }}</div>-->
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+                                </div>
+                                <div class="form-group">
+                                    <label>Waarde zin 1</label>
+                                    <div class="fg-line">
+                                        <textarea class="form-control" rows="5" ng-model="project.missionStatement1" placeholder="Zin over bovenstaande 3 waardekaarten">{{ project.missionStatement1 }}</textarea>
+                                    </div>
+                                </div>
+
+
+                                <br/><br/>
+
+                                <h4>Tweede zin</h4>
+                                <div class="form-group">
+                                    <label for="cards2">Waardekaarten voor deze zin</label>
+
+                                    <div class="row" id="cards2">
+                                        <div class="row">
+                                            <div class="col-md-3 col-md-offset-4 valuecard">
+                                                <img data-ng-if="project.missionCard2" class="valueCardImg" src="modules/team/partial/mission/images/23plusone2012_voorkant{{ project.missionCard2 }}.jpg">
+                                                <!--<div>{{ valueCards[project.missionCard2].name.name }}</div>-->
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3 col-md-offset-2 valuecard">
+                                                <img data-ng-if="project.missionCard4" class="valueCardImg" src="modules/team/partial/mission/images/23plusone2012_voorkant{{ project.missionCard4 }}.jpg">
+                                                <!--<div>{{ valueCards[project.missionCard4].name.name }}</div>-->
+                                            </div>
+                                            <div class="col-md-3 col-md-offset-1 valuecard">
+                                                <img data-ng-if="project.missionCard5" class="valueCardImg" src="modules/team/partial/mission/images/23plusone2012_voorkant{{ project.missionCard5 }}.jpg">
+                                                <!--<div>{{ valueCards[project.missionCard5].name.name }}</div>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Waarde zin 2</label>
+                                    <div class="fg-line">
+                                        <textarea class="form-control" rows="5" ng-model="project.missionStatement2" placeholder="Zin over bovenstaande 3 waardekaarten">{{ project.missionStatement2 }}</textarea>
+                                    </div>
+                                </div>
+
+                                <br/><br/>
+
+                                <h4>Derde zin</h4>
+                                <div class="form-group">
+                                    <label for="cards3">Waardekaarten voor deze zin</label>
+
+                                    <div class="row" id="cards3">
+                                        <div class="row">
+                                            <div class="col-md-3 col-md-offset-4 valuecard">
+                                                <img data-ng-if="project.missionCard3" class="valueCardImg" src="modules/team/partial/mission/images/23plusone2012_voorkant{{ project.missionCard3 }}.jpg">
+                                                <!--<div>{{ valueCards[project.missionCard3].name.name }}</div>-->
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3 col-md-offset-2 valuecard">
+                                                <img data-ng-if="project.missionCard5" class="valueCardImg" src="modules/team/partial/mission/images/23plusone2012_voorkant{{ project.missionCard5 }}.jpg">
+                                                <!--<div>{{ valueCards[project.missionCard5].name.name }}</div>-->
+                                            </div>
+                                            <div class="col-md-3 col-md-offset-1 valuecard">
+                                                <img data-ng-if="project.missionCard6" class="valueCardImg" src="modules/team/partial/mission/images/23plusone2012_voorkant{{ project.missionCard6 }}.jpg">
+                                                <!--<div>{{ valueCards[project.missionCard6].name.name }}</div>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Waarde zin 3</label>
+                                    <div class="fg-line">
+                                        <textarea class="form-control" rows="5" ng-model="project.missionStatement3" placeholder="Zin over bovenstaande 3 waardekaarten">{{ project.missionStatement3 }}</textarea>
+                                    </div>
+                                </div>
+                                <br/><br/>
+
+                                <button class="pull-right btn btn-info" data-ng-click="saveProject(project); status.openStep3 = false; status.openStep4 = true;">Volgende stap <i class="zmdi zmdi-arrow-right"></i></button>
+                            </form>
+                        </accordion-group>
+                        <accordion-group is-open="status.openStep4" heading="Stap 4: Jullie missie">
+                            <h3>Missie</h3>
+                            <form>
+                                <div class="form-group">
+                                    <label for="vision">Visie</label>
+                                    <div id="vision" class="well">{{ project.vision }}</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="vision">Jullie losse missie zinnen</label>
+                                    <ul>
+                                        <li>{{ project.missionStatement1 }}</li>
+                                        <li>{{ project.missionStatement2 }}</li>
+                                        <li>{{ project.missionStatement3 }}</li>
+
+                                    </ul>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Jullie missie</label>
+                                    <div class="fg-line">
+                                        <textarea class="form-control" rows="5" ng-model="project.mission" placeholder="Jullie missie. Gecombineerd uit de bovenstaande 3 zinnen.">{{ project.mission }}</textarea>
+                                    </div>
+                                </div>
+
+
+                                <button class="pull-right btn btn-info" data-ng-click="saveProject(project); status.openStep4 = false;">Opslaan <i class="zmdi zmdi-arrow-right"></i></button>
+
+                            </form>
+                        </accordion-group>
+
+                </accordion>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <div class="card">
+                        <div class="card-header bgm-indigo">
+                            <h2>Missie <small>Wie zijn we en wat zijn onze waarden?</small></h2>
+                        </div>
+
+                        <div class="card-body card-padding">
+                            <p class="" data-ng-if="project.mission">{{ project.mission }}</p>
+                            <p class="" data-ng-if="!project.mission"><i>Nog geen missie</i></p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+</section>

@@ -1,0 +1,98 @@
+<header id="header" data-ng-include src="'includes/header.html'" data-ng-controller="headerCtrl as hctrl"></header>
+
+<section id="main">
+    <aside id="sidebar" data-ng-controller="sideBarCtrl" data-ng-include src="'includes/sidebar-left.html'" data-ng-class="{ 'toggled': app.sidebarToggle.left === true }"></aside>
+
+    <!-- <aside id="chat" data-ng-include src="'includes/chat.html'" data-ng-class="{ 'toggled': app.sidebarToggle.right === true }"></aside> -->
+
+    <section id="content">
+
+        <div class="container" ng-controller="MyteamCtrl">
+
+            <div class="block-header">
+                <h2>Mijn team</h2>
+            </div>
+
+
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-header bgm-purple">
+                        <h2>Ons Team <small>Wij zijn de veranderaars.</small></h2>
+
+                        <!--<button class="btn bgm-orange btn-float waves-effect waves-effect"><i class="zmdi zmdi-plus"></i></button>-->
+                    </div>
+
+                    <div class="card-body card-padding">
+                        <div class="listview">
+
+
+                            <div class="lv-item ng-scope" href="" data-ng-repeat="member in members">
+                                <div class="media">
+                                    <div class="pull-left">
+                                        <img class="lv-img-sm" data-ng-src="img/profile-pics/8.jpg" alt="" src="img/profile-pics/8.jpg">
+                                    </div>
+                                    <div class="media-body">
+                                        <div class="lv-title">{{ member.name }}</div>
+                                        <small class="lv-small ng-binding">
+                                            Opties: <a href="" data-ng-click="removeMember(member);">verwijderen</a>
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-header bgm-orange">
+                        <h2>Teamlid toevoegen <small> Samen sterker.</small></h2>
+
+                        <!--<button class="btn bgm-orange btn-float waves-effect waves-effect"><i class="zmdi zmdi-plus"></i></button>-->
+                    </div>
+
+                    <div class="card-body card-padding">
+                        <form>
+                            <div class="form-group fg-float">
+                                <div class="fg-line">
+                                    <input type="text" class="form-control fg-input" data-ng-model="member.name">
+                                </div>
+                                <label class="fg-label">Naam van nieuwe teamlid</label>
+                            </div>
+                            <div class="form-group fg-float">
+                                <div class="fg-line">
+                                    <input type="text" class="form-control fg-input" data-ng-model="member.email">
+                                </div>
+                                <label class="fg-label">Zijn of haar E-Mail adres</label>
+                            </div>
+                            <div class="form-group fg-float">
+                                <div class="fg-line">
+                                    <input type="text" class="form-control fg-input" data-ng-model="member.pass">
+                                </div>
+                                <label class="fg-label">En een (tijdelijk) wachtwoord</label>
+                            </div>
+
+
+
+                            <button class="btn btn-primary" data-ng-click="addMember()">Teamlid toevoegen</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+        </div>
+    </section>
+</section>
+
+
+

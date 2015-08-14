@@ -1,0 +1,74 @@
+    <header id="header" data-ng-include src="'includes/header.html'" data-ng-controller="headerCtrl as hctrl"></header>
+
+    <section id="project">
+        <aside id="sidebar" data-ng-controller="sideBarCtrl" data-ng-include src="'includes/sidebar-left.html'" data-ng-class="{ 'toggled': app.sidebarToggle.left === true }"></aside>
+
+        <!-- <aside id="chat" data-ng-include src="'includes/chat.html'" data-ng-class="{ 'toggled': app.sidebarToggle.right === true }"></aside> -->
+
+        <section id="content">
+
+
+
+            <div class="container" ng-controller="ProfilesettingsCtrl">
+                <div class="block-header">
+                    <h2>
+                        Profielinstellingen
+                    </h2>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-sm-6 col-md-4">
+                        <div class="card">
+                            <div class="card-header bgm-pink">
+                                <h2>Wachtwoord <small>Wachtwoord wijzigen</small></h2>
+                            </div>
+
+
+                            <div class="card-body card-padding">
+                                <form data-ng-submit="savePass(pass);">
+
+                                    <p class="c-black f-500 m-b-20">Oud wachtwoord</p>
+                                    <div class="form-group fg-float">
+                                        <div class="fg-line">
+                                            <input type="password" class="form-control fg-input" data-ng-model="pass.old" >
+                                        </div>
+                                    </div>
+
+                                    <p class="c-black f-500 m-b-20">Nieuw wachtwoord</p>
+                                    <div class="form-group fg-float">
+                                        <div class="fg-line">
+                                            <input type="password" class="form-control fg-input" data-ng-model="pass.new1" >
+                                        </div>
+                                    </div>
+
+                                    <p class="c-black f-500 m-b-20">Nieuw wachtwoord nogmaals</p>
+                                    <div class="form-group fg-float">
+                                        <div class="fg-line">
+                                            <input type="password" class="form-control fg-input" data-ng-model="pass.new2" >
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn-primary btn">Wachtwoord instellen</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-4">
+                        <div class="card">
+                            <div class="card-header bgm-teal">
+                                <h2>Extra opties <small>Wat kunnen we nog meer?</small></h2>
+                            </div>
+
+                            <div class="card-body card-padding">
+                                Binnenkort!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+    </section>

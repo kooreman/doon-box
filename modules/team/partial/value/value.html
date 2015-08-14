@@ -1,0 +1,813 @@
+
+
+<header id="header" data-ng-include src="'includes/header.html'" data-ng-controller="headerCtrl as hctrl"></header>
+
+<section id="main">
+    <aside id="sidebar" data-ng-controller="sideBarCtrl" data-ng-include src="'includes/sidebar-left.html'" data-ng-class="{ 'toggled': app.sidebarToggle.left === true }"></aside>
+
+    <!-- <aside id="chat" data-ng-include src="'includes/chat.html'" data-ng-class="{ 'toggled': app.sidebarToggle.right === true }"></aside> -->
+
+    <section id="content">
+        <div class="container" id="value" ng-controller="ValueCtrl">
+            <div class="block-header">
+                <h2><a data-ui-sref="project({teamId: authUser.team, projectId : project.$id})" data-ng-click="app.sidebarStat($event)">{{ project.name }}</a> / Waardepropositie</h2>
+            </div>
+
+            <div class="row" >
+                <div class="col-md-8" >
+
+
+                    <accordion close-others="oneAtATime">
+                        <accordion-group is-open="status.openStep1" heading="Stap 1: Uitleg">
+                            <p>
+                                In deze stap bekijk je welke waarde je levert aan jouw klant. Om dit te doen moet je denken
+                                zoals je klant denkt. Hoe ziet een dag van je klant eruit? Wat probeert je klant te bereiken
+                                en waarom? Welke zorgen of problemen heeft hij als hij dit probeert te bereiken? En als die
+                                problemen er niet zouden zijn, welke voordelen kan hij dan bereiken?
+                            </p>
+                            <p>
+                                Jouw product of dienst neemt de zorgen van jouw klant weg en helpt hem zijn voordelen te
+                                bereiken. In deze stap schrijf je precies op hoe jouw product of dienst dat doet.
+                            </p>
+
+                            <h3>Wat is nou jullie waarde?</h3>
+                            <ol>
+                                <li>
+                                    Vul eerst de rechter vlak van de plaat in, over je klant. Wie is je klant?.
+                                    Schrijf op wat je klant probeert te bereiken. Welke taken voert je klant uit?
+                                    Denk goed na over waarom de klant dit wil.
+                                </li>
+                                <li>
+                                    Klik op een taak.
+                                </li>
+                                <li>
+                                    Schrijf op welke zorgen of problemen je klant heeft bij het uitvoeren van deze
+                                    taken. Waarom ligt je klant er ‘s nachts wakker van?
+                                </li>
+                                <li>
+                                    Schrijf op welke voordelen je klant kan krijgen als zijn zorgen en problemen
+                                    er niet zouden zijn.
+                                </li>
+                                <li>
+                                    Beschrijf de functionele, sociale en emotionele aspecten die bij de taak komen
+                                    kijken. Wat moet het resultaat zijn van de taak (functioneel)? Is er invloed
+                                    op de relaties die iemand heeft voor, tijdens en na de taak (sociaal)? Voelt
+                                    iemand zich anders voor, tijdens en na het volbrengen van de taak (emotioneel)?
+                                </li>
+                                <li>
+                                    Vul nu de linkerkant van de plaat in (jullie producten en of diensten). Schrijf
+                                    op welk product en mogelijk ook welke dienst je aan je klant gaat bieden.
+                                </li>
+                                <li>
+                                    Klik op het product of de dienst die je toegevoegd hebt.
+                                </li>
+                                <li>
+                                    Schrijf op hoe jouw product en of dienst de zorgen of problemen van jouw klant
+                                    wegneemt of oplost.
+                                </li>
+                                <li>
+                                    Schrijf op hoe jouw product en of dienst jouw klant helpt om de voordelen
+                                    te behalen of te versterken.
+                                </li>
+                                <li>
+                                    Beschrijf bondig de functionele aspecten (wat doet het), sociale aspecten (invloed op
+                                    relaties) en emotionele aspecten (hoe voelt de klant zich), die jouw product
+                                    of dienst veroorzaken bij de klant.
+                                </li>
+                            </ol>
+                            <p>
+                                Je weet nu welke waarde je levert voor jouw klant. Bedenk wel dat wat je opgeschreven
+                                hebt jóuw beeld is van wie jouw klant is. Je hebt hierbij aannames gemaakt. En dat is
+                                prima. In de stap “Get out of the building” ga je controleren of jouw aannames ook
+                                echt waar zijn. Dat doe je door zo snel mogelijk in gesprek te gaan met je klanten.
+                            </p>
+
+
+
+
+                            <button class="pull-right btn btn-info" data-ng-click="status.openStep1 = false; status.openStep2 = true;">Volgende stap <i class="zmdi zmdi-arrow-right"></i></button>
+                        </accordion-group>
+                        <accordion-group is-open="status.openStep2" heading="Stap 2: Wat wil je klant eigenlijk?">
+
+
+
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4>Taak die gedaan moet worden toevoegen</h4>
+                                    <form class="thinborder-well" data-ng-submit="addJob(job);job='';">
+                                        <div class="form-group">
+                                            <label for="job">Taak die gedaan moet worden</label>
+                                            <input type="text" class="form-control" id="job" name="circumstances" ng-model="job.name" placeholder="Taak die gedaan moet worden" />
+                                            <p class="help-block">Wat is de door jullie geobserveerde Taak die gedaan moet worden (taak) die iemand probeert uit te voeren?</p>
+                                        </div>
+
+
+                                        <button type="submit" class="btn btn-primary">Taak die gedaan moet worden toevoegen</button>
+                                    </form>
+                                </div>
+                                <div class="col-md-6" data-ng-if="jobsToBeDone.length > 0">
+                                    <h4>Jobs to be done</h4>
+                                    <div >
+                                        <ul>
+                                            <li data-ng-repeat="j in jobsToBeDone"><span data-ng-click="jobModal(j);">{{ j.name }} </span>
+                                                <button data-ng-click="removeJob(j)"><i class="fa fa-trash-o"></i></button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <br/>
+
+                            <button class="pull-right btn btn-info" data-ng-click="status.openStep2 = false; status.openStep3 = true;">Volgende stap <i class="zmdi zmdi-arrow-right"></i></button>
+
+                            <!-- modal per partner -->
+                            <script type="text/ng-template" id="JobModalCtrl.html">
+
+                                <div class="modal-header">
+                                    <h3 class="modal-title">{{ job.name }}</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="row well">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="job2">Taak die gedaan moet worden</label>
+                                                    <input type="text" class="form-control" id="job2" name="circumstances" ng-model="job.name" placeholder="Taak die gedaan moet worden" />
+                                                    <p class="help-block">Wat is de door jullie geobserveerde Taak die gedaan moet worden (taak) die iemand probeert uit te voeren?</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Omstandigheden</label>
+                                                    <textarea class="form-control" rows="5 name="circumstances" ng-model="job.circumstances" placeholder="Omstandigheden"></textarea>
+                                                    <p class="help-block">Beschrijving van de omstandigheden waarom iemand deze taak gedaan wil krijgen. Waarom moet deze taak uberhaupt gedaan worden?</p>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="who">Wie?</label>
+                                                    <textarea class="form-control" rows="5" id="who" name="who" ng-model="job.who" placeholder="Wie?"></textarea>
+                                                    <p class="help-block">Korte omschrijving van de persoon (of groep) die dit gedaan wil kunnen krijgen. We gebruiken dit niet als marktsegmentatie.</p>
+                                                </div>
+
+                                                <!--<div class="form-group">-->
+                                                    <!--<label for="important">Hoe belangrijk is de oplossing voor deze persoon??</label>-->
+                                                    <!--<div id="important" >-->
+                                                        <!--<rating ng-model="job.important" max="5" state-on="'fa fa-star'" state-off="'fa fa-star-o'"></rating>-->
+                                                    <!--</div>-->
+                                                    <!--<p class="help-block">Hoe belangrijk vind de persoon het om deze Taak die gedaan moet worden op te lossen?</p>-->
+                                                <!--</div>-->
+
+                                                <!--<div class="form-group">-->
+                                                    <!--<label for="important">Bestaande oplossingen</label>-->
+                                                    <!--<div id="solutions" >-->
+                                                        <!--<rating ng-model="job.solutions" max="5" state-on="'fa fa-star'" state-off="'fa fa-star-o'"></rating>-->
+                                                    <!--</div>-->
+                                                    <!--<p class="help-block">In hoeverre zijn er al bestaande oplossingen voor deze Taak die gedaan moet worden?</p>-->
+                                                <!--</div>-->
+
+
+                                                <!--<div class="form-group">-->
+                                                    <!--<label for="important">Waarde</label>-->
+                                                    <!--<div id="amountValue" >-->
+                                                        <!--<rating ng-model="job.amountValue" max="5" state-on="'fa fa-star'" state-off="'fa fa-star-o'"></rating>-->
+                                                    <!--</div>-->
+                                                    <!--<p class="help-block">Hoe groot is de waarde voor deze persoon, om deze Taak die gedaan moet worden opgelost te krijgen?</p>-->
+                                                <!--</div>-->
+
+
+
+                                            </div>
+                                            <div class="col-md-6">
+
+                                                <div class="form-group">
+                                                    <label for="functional2">Functionele dimensie</label>
+                                                    <ul>
+                                                        <li data-ng-repeat="i in job.functionalItems"><span>{{ i }} </span>
+                                                            <button data-ng-click="removeFunctionalDimensionItem(i);"><i class="fa fa-trash-o"></i></button>
+                                                        </li>
+                                                    </ul>
+
+                                                    <input class="form-control" id="functional2" name="functional" ng-model="functionalItem" placeholder="Functionele dimensie" />
+                                                    <button data-ng-click="addFunctionalDimensionItem(functionalItem);functionalItem='';"><i class="fa fa-plus"></i></button>
+                                                    <p class="help-block">Wat moet de oplossing doen? (Dus niet, wat kan je product)</p>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="social">Sociale dimensie</label>
+                                                    <ul>
+                                                        <li data-ng-repeat="i in job.socialItems"><span>{{ i }} </span>
+                                                            <button data-ng-click="removeSocialDimensionItem(i);"><i class="fa fa-trash-o"></i></button>
+                                                        </li>
+                                                    </ul>
+
+                                                    <input class="form-control" id="social" name="social" ng-model="socialItem" placeholder="Functionele dimensie" />
+                                                    <button data-ng-click="addSocialDimensionItem(socialItem);socialItem='';"><i class="fa fa-plus"></i></button>
+                                                    <p class="help-block">Hoe zien anderen je, voor, tijdens en na het oplossen van de Taak die gedaan moet worden?</p>
+
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="emotional">Emotionele dimensie</label>
+
+                                                    <ul>
+                                                        <li data-ng-repeat="i in job.emotionalItems"><span>{{ i }} </span>
+                                                            <button data-ng-click="removeEmotionalDimensionItem(i);"><i class="fa fa-trash-o"></i></button>
+                                                        </li>
+                                                    </ul>
+
+                                                    <input class="form-control" id="emotional" name="social" ng-model="emotionalItem" placeholder="Emotionele dimensie" />
+                                                    <button data-ng-click="addEmotionalDimensionItem(emotionalItem);emotionalItem='';"><i class="fa fa-plus"></i></button>
+
+                                                    <p class="help-block">Hoe voelt deze persoon zich, voor, tijdens en na de Taak die gedaan moet worden?</p>
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <label for="pain">Zorgen</label>
+
+                                                    <ul>
+                                                        <li data-ng-repeat="i in job.pains"><span>{{ i }} </span>
+                                                            <button data-ng-click="removePainsItem(i);"><i class="fa fa-trash-o"></i></button>
+                                                        </li>
+                                                    </ul>
+
+                                                    <input class="form-control" id="pain" name="pain" ng-model="painItem" placeholder="Zorgen" />
+                                                    <button data-ng-click="addPainsItem(painItem);painItem='';"><i class="fa fa-plus"></i></button>
+
+                                                    <p class="help-block">Welke zorgen heeft de persoon, voor, tijdens en na het uitvoeren van de Taak die gedaan moet worden?</p>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="gain">Voordelen</label>
+
+                                                    <ul>
+                                                        <li data-ng-repeat="i in job.gains"><span>{{ i }} </span>
+                                                            <button data-ng-click="removeGainsItem(i);"><i class="fa fa-trash-o"></i></button>
+                                                        </li>
+                                                    </ul>
+
+                                                    <input class="form-control" id="gain" name="gain" ng-model="gainItem" placeholder="Voordelen" />
+                                                    <button data-ng-click="addGainsItem(gainItem);gainItem='';"><i class="fa fa-plus"></i></button>
+
+
+                                                    <!--<input class="form-control" id="gain" name="gain" ng-model="job.gainItems" placeholder="Voordelen" />-->
+                                                    <p class="help-block">Wat is het voordeel als je de Taak die gedaan moet worden uitvoerd of uitgevoerd hebt?</p>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+                                    </form>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-primary" ng-click="ok(job)">Opslaan en afsluiten</button>
+                                    
+                                </div>
+                            </script>
+
+
+
+                        </accordion-group>
+                        <accordion-group is-open="status.openStep3" heading="Stap 3: Jullie producten en diensten">
+
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4>Product of dienst toevoegen</h4>
+                                    <form class="thinborder-well" data-ng-submit="addProd(prodservice);prodservice='';">
+                                        <div class="form-group">
+                                            <label>Product of dienst</label>
+                                            <input type="text" class="form-control" name="productOrService" ng-model="prodservice.name" placeholder="Product of dienst" />
+                                            <p class="help-block">Welke product(en) of dienst(en) bied je?</p>
+                                        </div>
+
+
+                                        <button type="submit" class="btn btn-primary">Product of dienst toevoegen</button>
+                                    </form>
+                                </div>
+                                <div class="col-md-6" data-ng-if="prodservices.length > 0">
+                                    <h4>Jullie producten en diensten</h4>
+                                    <div >
+                                        <ul>
+                                            <li data-ng-repeat="p in prodservices"><span data-ng-click="prodModal(p);">{{ p.name }} </span>
+                                                <button data-ng-click="removeProd(p)"><i class="fa fa-trash-o"></i></button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <br/>
+
+                            <button class="pull-right btn btn-info" data-ng-click="status.openStep3 = false;">Klaar <i class="zmdi zmdi-arrow-right"></i></button>
+-
+
+
+
+                            <!-- modal per product -->
+                            <script type="text/ng-template" id="ProdModalCtrl.html">
+
+                                <div class="modal-header">
+                                    <h3 class="modal-title">{{ prodservice.name }}</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="row well">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="job3">Product of dienst</label>
+                                                    <input type="text" class="form-control" id="job3" name="circumstances" ng-model="prodservice.name" placeholder="Taak die gedaan moet worden" />
+                                                    <p class="help-block">Wat is het door jullie geboden product, dat aansluit bij de behoeftes van de klant?</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Omstandigheden</label>
+                                                    <textarea class="form-control" rows="5" id="circumstances2" name="circumstances" ng-model="prodservice.circumstances" placeholder="Omstandigheden"></textarea>
+                                                    <p class="help-block">Beschrijving jullie nieuwe product of dienst</p>
+                                                </div>
+
+
+                                                <!--<div class="form-group">-->
+                                                    <!--<label>Bestaande alternatieven</label>-->
+                                                    <!--<div>-->
+                                                        <!--<rating ng-model="prodservice.alternatives" max="5" state-on="'fa fa-star'" state-off="'fa fa-star-o'"></rating>-->
+                                                    <!--</div>-->
+                                                    <!--<p class="help-block">In hoeverre zijn er al bestaande alternatieven voor dit product of dienst?</p>-->
+                                                <!--</div>-->
+
+
+                                                <!--<div class="form-group">-->
+                                                    <!--<label for="competitiveValue">Waarde</label>-->
+                                                    <!--<div id="competitiveValue" >-->
+                                                        <!--<rating ng-model="prodservice.competitiveValue" max="5" state-on="'fa fa-star'" state-off="'fa fa-star-o'"></rating>-->
+                                                    <!--</div>-->
+                                                    <!--<p class="help-block">Hoeveel kost dit product of dienst, relatief ten opzichte van de concurrentie?</p>-->
+                                                <!--</div>-->
+
+
+
+                                            </div>
+                                            <div class="col-md-6">
+
+                                                <div class="form-group">
+                                                    <label>Functionele dimensie</label>
+                                                    <ul>
+                                                        <li data-ng-repeat="i in prodservice.functionalItems"><span>{{ i }} </span>
+                                                            <button data-ng-click="removeFunctionalDimensionItem(i);"><i class="fa fa-trash-o"></i></button>
+                                                        </li>
+                                                    </ul>
+
+                                                    <input class="form-control" name="functional" ng-model="functionalItem" placeholder="Functionele dimensie" />
+                                                    <button data-ng-click="addFunctionalDimensionItem(functionalItem);functionalItem='';"><i class="fa fa-plus"></i></button>
+                                                    <p class="help-block">Wat krijgt het product voor de gebruiker gedaan?</p>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Sociale dimensie</label>
+                                                    <ul>
+                                                        <li data-ng-repeat="i in prodservice.socialItems"><span>{{ i }} </span>
+                                                            <button data-ng-click="removeSocialDimensionItem(i);"><i class="fa fa-trash-o"></i></button>
+                                                        </li>
+                                                    </ul>
+
+                                                    <input class="form-control" name="social" ng-model="socialItem" placeholder="Functionele dimensie" />
+                                                    <button data-ng-click="addSocialDimensionItem(socialItem);socialItem='';"><i class="fa fa-plus"></i></button>
+                                                    <p class="help-block">Hoe zien anderen het (gebruik van) het product of dienst (ervoor, tijdens of na)?</p>
+
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Emotionele dimensie</label>
+
+                                                    <ul>
+                                                        <li data-ng-repeat="i in prodservice.emotionalItems"><span>{{ i }} </span>
+                                                            <button data-ng-click="removeEmotionalDimensionItem(i);"><i class="fa fa-trash-o"></i></button>
+                                                        </li>
+                                                    </ul>
+
+                                                    <input class="form-control" name="social" ng-model="emotionalItem" placeholder="Emotionele dimensie" />
+                                                    <button data-ng-click="addEmotionalDimensionItem(emotionalItem);emotionalItem='';"><i class="fa fa-plus"></i></button>
+
+                                                    <p class="help-block">Hoe voelt deze persoon zich, voor, tijdens en na het gebruik van jullie product of dienst?</p>
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <label>Pijnstillers</label>
+
+                                                    <ul>
+                                                        <li data-ng-repeat="i in prodservice.painKillers"><span>{{ i }} </span>
+                                                            <button data-ng-click="removePainsItem(i);"><i class="fa fa-trash-o"></i></button>
+                                                        </li>
+                                                    </ul>
+
+                                                    <input class="form-control" name="pain" ng-model="painItem" placeholder="Zorgen" />
+                                                    <button data-ng-click="addPainsItem(painItem);painItem='';"><i class="fa fa-plus"></i></button>
+
+                                                    <p class="help-block">Welke pijnstillers biedt dit product of dienst voor de zorgen van de gebruiker?</p>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="gain">Voordeel versterkers</label>
+
+                                                    <ul>
+                                                        <li data-ng-repeat="i in prodservice.gainCreators"><span>{{ i }} </span>
+                                                            <button data-ng-click="removeGainsItem(i);"><i class="fa fa-trash-o"></i></button>
+                                                        </li>
+                                                    </ul>
+
+                                                    <input class="form-control" name="gain" ng-model="gainItem" placeholder="Voordelen" />
+                                                    <button data-ng-click="addGainsItem(gainItem);gainItem='';"><i class="fa fa-plus"></i></button>
+
+
+                                                    <!--<input class="form-control" id="gain" name="gain" ng-model="prodservice.gainItems" placeholder="Voordelen" />-->
+                                                    <p class="help-block">Hoe versterkt jullie product de voordelen die de gebruiker heeft (als deze de Taak die gedaan moet worden gedaan krijgt)?</p>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </form>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-primary" ng-click="ok(prodservice)">Opslaan en afsluiten</button>
+
+                                </div>
+                            </script>
+
+                        </accordion-group>
+                    </accordion>
+
+                </div>
+            </div>
+
+
+
+
+
+
+            <div class="row hidden-xs hidden-sm" >
+                <div class="col-sm-12 col-md-12">
+                    <div class="card">
+                            <div class="card-header bgm-cyan">
+                                <h2>Waardepropositie <small>Wat doen jullie producten en diensten nu eigenlijk. Wat wil je klant?</small></h2>
+                            </div>
+
+                            <div class="card-body card-padding">
+
+                                <table class="valuecanvas">
+                                    <tr>
+                                        <td class="canvaselement">
+                                            <div class="bar">
+                                                <h5>Producten en diensten</h5>
+                                            </div>
+                                            <div class="listview">
+                                                <a class="lv-item" href="" data-ng-repeat="p in prodservices">
+                                                    <div class="row">
+                                                        <div class="col-md-9" data-ng-click="prodModal(p);">
+                                                            {{ p.name }}
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <button data-ng-click="removeProd(p)"><i class="fa fa-trash-o"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+
+
+                                        </td>
+                                        <td>
+                                            <table class="valuecanvas">
+                                                <tr>
+                                                    <td class="canvaselement table-right">
+                                                        <h5>Voordelen</h5>
+                                                        <div data-ng-repeat="prod in prodservices">
+                                                            <li data-ng-repeat="item in prod.gainCreators">
+                                                                <span data-ng-click="prodModal(prod);">{{ item }} </span>
+                                                            </li>
+                                                        </div>
+                                                    </td>
+                                                    <td class="canvaselement">
+                                                        <h5>Voordelen</h5>
+                                                        <div data-ng-repeat="job in jobsToBeDone">
+                                                            <li data-ng-repeat="item in job.gains">
+                                                                <span data-ng-click="jobModal(job);">{{ item }} </span>
+                                                            </li>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td class="canvaselement table-right">
+                                                        <h5>Zorgen</h5>
+                                                        <div data-ng-repeat="prod in prodservices">
+                                                            <li data-ng-repeat="item in prod.painKillers">
+                                                                <span data-ng-click="prodModal(prod);">{{ item }} </span>
+                                                            </li>
+                                                        </div>
+                                                    </td>
+                                                    <td class="canvaselement">
+                                                        <h5>Zorgen</h5>
+                                                        <div data-ng-repeat="job in jobsToBeDone">
+                                                            <li data-ng-repeat="item in job.pains">
+                                                                <span data-ng-click="jobModal(job);">{{ item }} </span>
+                                                            </li>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td class="canvaselement table-right">
+                                                        <h5>Functionele aspecten</h5>
+                                                        <div data-ng-repeat="prod in prodservices">
+                                                            <li data-ng-repeat="item in prod.functionalItems">
+                                                                <span data-ng-click="prodModal(prod);">{{ item }} </span>
+                                                            </li>
+                                                        </div>
+                                                    </td>
+                                                    <td class="canvaselement">
+                                                        <h5>Functionele aspecten</h5>
+                                                        <div data-ng-repeat="job in jobsToBeDone">
+                                                            <li data-ng-repeat="item in job.functionalItems">
+                                                                <span data-ng-click="jobModal(job);">{{ item }} </span>
+                                                            </li>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td class="canvaselement table-right">
+                                                        <h5>Sociale aspecten</h5>
+                                                        <div data-ng-repeat="prod in prodservices">
+                                                            <li data-ng-repeat="item in prod.socialItems">
+                                                                <span data-ng-click="prodModal(prod);">{{ item }} </span>
+                                                            </li>
+                                                        </div>
+                                                    </td>
+                                                    <td class="canvaselement">
+                                                        <h5>Sociale aspecten</h5>
+                                                        <div data-ng-repeat="job in jobsToBeDone">
+                                                            <li data-ng-repeat="item in job.socialItems">
+                                                                <span data-ng-click="jobModal(job);">{{ item }} </span>
+                                                            </li>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td class="canvaselement table-right">
+                                                        <h5>Emotionele aspecten</h5>
+                                                        <div data-ng-repeat="prod in prodservices">
+                                                            <li data-ng-repeat="item in prod.emotionalItems">
+                                                                <span data-ng-click="prodModal(prod);">{{ item }} </span>
+                                                            </li>
+                                                        </div>
+                                                    </td>
+                                                    <td class="canvaselement">
+                                                        <h5>Emotionele aspecten</h5>
+                                                        <div data-ng-repeat="job in jobsToBeDone">
+                                                            <li data-ng-repeat="item in job.emotionalItems">
+                                                                <span data-ng-click="jobModal(job);">{{ item }} </span>
+                                                            </li>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+
+                                            </table>
+                                        </td>
+                                        <td class="canvaselement">
+                                            <h5>Taak die gedaan moet worden</h5>
+
+                                            <div class="listview">
+                                                <a class="lv-item" href="" data-ng-repeat="j in jobsToBeDone">
+                                                    <div class="row">
+                                                        <div class="col-md-9" data-ng-click="jobModal(j);">
+                                                            {{ j.name }}
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <button data-ng-click="removeJob(j)"><i class="fa fa-trash-o"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row hidden-md hidden-lg" >
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header bgm-cyan">
+                            <h2>Klant <small>Wie is je klant eigenlijk?</small></h2>
+                        </div>
+
+                        <div class="card-body card-padding">
+
+                            <div class="row canvaselement">
+
+
+                                <div class="col-sm-6">
+                                    <div class="bar">
+                                        <h5>Taak die gedaan moet worden</h5>
+                                    </div>
+                                    <div class="">
+                                        <div class="listview">
+                                            <a class="lv-item" href="" data-ng-repeat="j in jobsToBeDone">
+                                                <div class="row">
+                                                    <div class="col-xs-9" data-ng-click="jobModal(j);">
+                                                        {{ j.name }}
+                                                    </div>
+                                                    <div class="col-xs-3">
+                                                        <button data-ng-click="removeJob(j)"><i class="fa fa-trash-o"></i></button>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+
+                                    <!-- Functional-->
+                                    <div class="row">
+                                        <div class="col-sm-12 canvaselement">
+                                            <h5>Functionele aspecten</h5>
+                                            <div data-ng-repeat="job in jobsToBeDone">
+                                                <li data-ng-repeat="item in job.functionalItems">
+                                                    <span data-ng-click="jobModal(job);">{{ item }} </span>
+                                                </li>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Sociale-->
+                                    <div class="row">
+                                        <div class="col-sm-12 canvaselement">
+                                            <h5>Sociale aspecten</h5>
+                                            <div data-ng-repeat="job in jobsToBeDone">
+                                                <li data-ng-repeat="item in job.socialItems">
+                                                    <span data-ng-click="jobModal(job);">{{ item }} </span>
+                                                </li>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Emotionele-->
+                                    <div class="row">
+                                        <div class="col-sm-12 canvaselement">
+                                            <h5>Emotionele aspecten</h5>
+                                            <div data-ng-repeat="job in jobsToBeDone">
+                                                <li data-ng-repeat="item in job.emotionalItems">
+                                                    <span data-ng-click="jobModal(job);">{{ item }} </span>
+                                                </li>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Voordelen-->
+                                    <div class="row">
+                                        <div class="col-sm-12 canvaselement">
+                                            <h5>Voordelen</h5>
+                                            <div data-ng-repeat="job in jobsToBeDone">
+                                                <li data-ng-repeat="item in job.gains">
+                                                    <span data-ng-click="jobModal(job);">{{ item }} </span>
+                                                </li>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Zorgen-->
+                                    <div class="row">
+                                        <div class="col-sm-12 canvaselement">
+                                            <h5>Zorgen</h5>
+                                            <div data-ng-repeat="job in jobsToBeDone">
+                                                <li data-ng-repeat="item in job.pains">
+                                                    <span data-ng-click="jobModal(job);">{{ item }} </span>
+                                                </li>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row hidden-md hidden-lg" >
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header bgm-orange">
+                            <h2>Waarde <small>Wat gaan jullie leveren?</small></h2>
+                        </div>
+
+                        <div class="card-body card-padding">
+
+                            <div class="row canvaselement">
+
+
+                                <div class="col-sm-6">
+                                    <h5>Producten en diensten</h5>
+                                    <div class="listview">
+                                        <a class="lv-item" href="" data-ng-repeat="p in prodservices">
+                                            <div class="row">
+                                                <div class="col-xs-9" data-ng-click="prodModal(p);">
+                                                    {{ p.name }}
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <button data-ng-click="removeProd(p)"><i class="fa fa-trash-o"></i></button>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+
+                                    <!-- Functional-->
+                                    <div class="row">
+                                        <div class="col-md-12 canvaselement">
+                                            <h5>Functionele aspecten</h5>
+                                            <div data-ng-repeat="prod in prodservices">
+                                                <li data-ng-repeat="item in prod.functionalItems">
+                                                    <span data-ng-click="prodModal(prod);">{{ item }} </span>
+                                                </li>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Sociale-->
+                                    <div class="row">
+                                        <div class="col-sm-12 canvaselement">
+                                            <h5>Sociale aspecten</h5>
+                                            <div data-ng-repeat="prod in prodservices">
+                                                <li data-ng-repeat="item in prod.socialItems">
+                                                    <span data-ng-click="prodModal(prod);">{{ item }} </span>
+                                                </li>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Emotionele-->
+                                    <div class="row">
+                                        <div class="col-sm-12 canvaselement">
+                                            <h5>Emotionele aspecten</h5>
+                                            <div data-ng-repeat="prod in prodservices">
+                                                <li data-ng-repeat="item in prod.emotionalItems">
+                                                    <span data-ng-click="prodModal(prod);">{{ item }} </span>
+                                                </li>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Voordelen-->
+                                    <div class="row">
+                                        <div class="col-sm-12 canvaselement">
+                                            <h5>Voordelen</h5>
+                                            <div data-ng-repeat="prod in prodservices">
+                                                <li data-ng-repeat="item in prod.gainCreators">
+                                                    <span data-ng-click="prodModal(prod);">{{ item }} </span>
+                                                </li>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Zorgen-->
+                                    <div class="row">
+                                        <div class="col-sm-12 canvaselement">
+                                            <h5>Zorgen</h5>
+                                            <div data-ng-repeat="prod in prodservices">
+                                                <li data-ng-repeat="item in prod.painKillers">
+                                                    <span data-ng-click="prodModal(prod);">{{ item }} </span>
+                                                </li>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</section>

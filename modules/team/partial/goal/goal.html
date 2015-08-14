@@ -1,0 +1,75 @@
+<header id="header" data-ng-include src="'includes/header.html'" data-ng-controller="headerCtrl as hctrl"></header>
+
+<section id="main">
+    <aside id="sidebar" data-ng-controller="sideBarCtrl" data-ng-include src="'includes/sidebar-left.html'" data-ng-class="{ 'toggled': app.sidebarToggle.left === true }"></aside>
+
+    <!-- <aside id="chat" data-ng-include src="'includes/chat.html'" data-ng-class="{ 'toggled': app.sidebarToggle.right === true }"></aside> -->
+
+    <section id="content">
+
+        <div class="container" id="goal" ng-controller="GoalCtrl">
+            <div class="block-header">
+                <h2><a data-ui-sref="project({teamId: authUser.team, projectId : project.$id})" data-ng-click="app.sidebarStat($event)">{{ project.name }}</a> / Doelfocus</h2>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8" >
+
+                    <accordion close-others="oneAtATime">
+
+
+                        <accordion-group is-open="status.openStep1" heading="Stap 1: Uitleg">
+                            <p>
+                                Om de juiste richting op te gaan, moet je weten waar je heen wilt. Dat lijkt logisch, maar is zo makkelijk nog niet. Een doelfocus helpt hierbij.
+                            </p>
+                            <p>
+                                Een doelfocus helpt je richting geven bij het bedenken van nieuwe oplossingen. Een doelfocus is een zin die begint met <i>hoe</i>. Bijvoorbeeld: <i>Hoe kunnen we zorgen dat jongeren meer water drinken?</i> of <i>Hoe zorgen we ervoor dat er in 2020 meer dan 30% van de huishoudens onafhankelijk zijn van netstroom</i>.
+                            </p>
+                            <h3>Hoe stel je jouw doelfocus op?</h3>
+                            <p>
+                                <ol>
+                                   <li>Beschrijf de eerste versie van jouw doelfocus, begin de zin met <i>hoe (kan ik)</i></li>
+                                   <li>Stel jezelf de vraag <i>waarom (wil ik dat)</i>. Formuleer met de uitkomst nogmaals een een <i>hoe (kan ik)</i> vraag. Op deze manier zoek je naar een bredere doelfocus</li>
+                                   <li>Stel jezelf ook de vraag <i>wat houdt me tegen om dit te bereiken?</i>. Pas je antwoorden weer aan naar een <i>hoe (kan ik)</i> vraag</li>
+                                   <li>Kies uit deze uitkomsten de doelfocus waarmee je verder wil werken. Deze moet niet te algemeen zijn, zoals <i>Hoe kan ik geld verdienen?</i>, maar ook niet zo specifiek dat je er te weinig mee kan, zoals <i>hoe kan geld verdienen met kranten bezorgen</i>.</li>
+                                </ol>
+                            </p>
+
+
+                            <button class="pull-right btn btn-info" data-ng-click="status.openStep1 = false; status.openStep2 = true;">Volgende stap <i class="zmdi zmdi-arrow-right"></i></button>
+                        </accordion-group>
+                        <accordion-group is-open="status.openStep2" heading="Stap 2: Doelfocus opstellen">
+
+                            <h3>Jullie gekozen doelfocus</h3>
+                            <form ng-submit="saveProject()">
+
+                                <div class="form-group">
+                                    <div class="fg-line">
+                                        <textarea class="form-control" rows="5" data-ng-model="project.goalFocus" placeholder="Vul jullie gekozen doelfocus hier in"></textarea>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="pull-right btn btn-info" data-ng-click="status.openStep2 = false;">Opslaan <i class="zmdi zmdi-arrow-right"></i></button>
+
+                            </form>
+                        </accordion-group>
+                    </accordion>
+                </div>
+                <div class="col-md-4">
+
+                    <div class="card">
+                        <div class="card-header bgm-teal">
+                            <h2>Doelfocus <small>Dit willen we bereiken.</small></h2>
+                        </div>
+
+                        <div class="card-body card-padding">
+                            <div data-ng-if="project.goalFocus">{{ project.goalFocus }}</div>
+                            <div data-ng-if="!project.goalFocus"><i>Nog geen doelfocus</i></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+          </div>
+    </section>
+</section>

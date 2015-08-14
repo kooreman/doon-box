@@ -1,0 +1,18 @@
+<h4>Job-To-Be-Done</h4>
+
+<ul>
+    <li data-ng-repeat="j in jobsToBeDone | filter:{selected:true}">{{ j.name }}
+        <button data-ng-click="unselectJob(j);" data-ng-if="editableModel"><i class="fa fa-trash-o"></i></button>
+    </li>
+</ul>
+
+
+<form data-ng-if="editableModel">
+    <div class="row">
+        <div class="col-sm-12">
+            <select id="job2" name="job" ng-model="job" class="form-control" ng-options="j.name for j in jobsToBeDone">
+            </select>
+            <button data-ng-click="selectJob(job);" class="col-sm-2">+</button>
+        </div>
+    </div>
+</form>

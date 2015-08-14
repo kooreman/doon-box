@@ -1,0 +1,239 @@
+<header id="header" data-ng-include src="'includes/header.html'" data-ng-controller="headerCtrl as hctrl"></header>
+
+<section id="main">
+    <aside id="sidebar" data-ng-controller="sideBarCtrl" data-ng-include src="'includes/sidebar-left.html'" data-ng-class="{ 'toggled': app.sidebarToggle.left === true }"></aside>
+
+    <!-- <aside id="chat" data-ng-include src="'includes/chat.html'" data-ng-class="{ 'toggled': app.sidebarToggle.right === true }"></aside> -->
+
+    <section id="content">
+        <div class="container" id="ideas" ng-controller="IdeasCtrl">
+            <div class="block-header">
+                <h2><a data-ui-sref="project({teamId: authUser.team, projectId : project.$id})" data-ng-click="app.sidebarStat($event)">{{ project.name }}</a> / Idee&euml;n</h2>
+            </div>
+
+            <div  class="row" >
+                <div class="col-sm-12 col-md-8">
+
+                    <accordion close-others="oneAtATime">
+                        <accordion-group is-open="status.openStep1" heading="Stap 1: Uitleg">
+                            <p>
+                                Om te komen tot een enkel idee, dat kan leiden tot een succesvol product of dienst, daarvoor zijn er veel ideeën nodig.
+                            </p>
+                            <p>
+                                In deze stap  gaan jullie zoveel mogelijk ideeën genereren. Zonder dat iets je tegenhoud, dus echt “The sky is the limit”! De enige grens wordt aangegeven door de doelfocus die jullie gekozen hebben. De ideeën mogen gek, raar, vreemd en zelfs onmogelijk zijn.
+                            </p>
+                            <h3>Hoe kom je tot nieuwe idee&euml;n?</h3>
+                            <p>
+                                <ol>
+                                    <li>Eerst schrijf je 5 minuten lang, in stilte en voor jezelf, alle mogelijke oplossingen en idee&euml;n  op, binnen de kaders van jouw doelfocus. Elk teamlid kan dit doen.</li>
+                                    <li>Als je dit samen doet met je team, licht dan jouw idee&euml;n een voor een kort toe. Je team mag geen commentaar leveren, alleen maar vragen om verduidelijking.</li>
+                                    <li>Voer hieronder jullie idee&euml;n in, en categoriseer ze naar vaag, conceptueel en concreet. Vage idee&euml;n kan je nu nog niets mee, concepten zijn wel duidelijker, maar moeten nog concreet gemaakt worden, en concrete idee&euml;n kan je direct mee aan de slag.</li>
+                                    <li>Schrijf nu weer 5 minuten idee&euml;n op, op basis van wat je nu al hebt. Probeer vage idee&euml;n te vertalen naar concepten en concepten naar concrete idee&euml;n.</li>
+                                    <li>Kies de beste 3 idee&euml;n</li>
+                                    <li>Voor elk van de 3 idee&euml;n, denk 5 minuten na over waarom het idee onmogelijk en heel slecht is. Schrijf dit op.</li>
+                                    <li>Voor elk van de 3 idee&euml;n, denk 5 minuten na over waarom het idee heel goed is. Schrijf dit op.</li>
+                                    <li>Bedenk nog 5 minuten hoe je de negatieve punten kan wegnemen, en de positieve onderdelen kan versterken</li>
+                                    <li>Kies het idee waar je mee verder wil gaan, klik deze aan, onderin het overzicht, en vul deze aan waar mogelijk met meer informatie en selecteer deze.</li>
+                                </ol>
+                            </p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            <button class="pull-right btn btn-info" data-ng-click="status.openStep1 = false; status.openStep2 = true;">Volgende stap <i class="zmdi zmdi-arrow-right"></i></button>
+                        </accordion-group>
+                        <accordion-group is-open="status.openStep2" heading="Stap 2: Idee&euml;n toevoegen">
+
+
+                            <form>
+                                <div class="form-group">
+                                    <label for="goalFocus">Jullie doelfocus</label>
+                                    <div id="goalFocus" class="well">{{ project.goalFocus }}</div>
+                                </div>
+
+
+                                <h3>Idee toevoegen</h3>
+                                <div class="thinborder-well">
+
+                                    <div class="form-group fg-float">
+                                        <div class="fg-line">
+                                            <input type="text" data-ng-model="idea.name" class="form-control fg-input">
+                                        </div>
+                                        <label class="fg-label">Jouw idee</label>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Toelichting</label>
+                                        <div class="fg-line">
+                                            <textarea class="form-control" rows="5" ng-model="idea.description" placeholder="Wat houdt het idee in?"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="type">Type</label>
+                                        <select id="type" name="type" ng-model="idea.type" class="form-control" required>
+                                            <option value="vague">Vaag</option>
+                                            <option value="concept">Concept</option>
+                                            <option value="specific">Specifiek</option>
+                                        </select>
+                                    </div>
+                                    <!--<div class="form-group">-->
+                                        <!--<label for="category">Categorie</label>-->
+                                        <!--<select id="category" name="category" ng-model="idea.category" class="form-control" required>-->
+                                            <!--<option value="partner">Partner</option>-->
+                                            <!--<option value="activity">Activiteit</option>-->
+                                            <!--<option value="resource">Middel</option>-->
+                                            <!--<option value="...">...</option>-->
+                                        <!--</select>-->
+                                    <!--</div>-->
+
+                                    <div class="checkbox m-b-15">
+                                        <label>
+                                            <input type="checkbox" data-ng-model="idea.selected" value="true">
+                                            <i class="input-helper"></i>
+                                            Hebben jullie dit idee gekozen?
+                                        </label>
+                                    </div>
+
+
+                                    <button data-ng-click="addIdea(idea);" type="submit" class="btn btn-primary">Idee toevoegen</button>
+                                </div>
+
+                            </form>
+
+                            <button class="pull-right btn btn-info" data-ng-click="status.openStep2 = false;">Klaar!</button>
+                        </accordion-group>
+                    </accordion>
+
+                </div>
+            </div>
+
+            <div class="row">
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <div class="card-header bgm-cyan">
+                                <h2>Vaag <small>Hier zitten vaak de leukste dingen tussen...</small></h2>
+                            </div>
+
+                            <div class="card-body card-padding">
+                                <ul>
+                                    <li data-ng-repeat="i in ideas | filter:{type:'vague'}">
+                                        <span ng-click="modalIdea(i)">
+                                            <strong data-ng-if="i.selected">{{ i.name }}</strong>
+                                            <span data-ng-if="!i.selected">{{ i.name }}</span>
+                                        </span>
+                                        <button data-ng-click="removeIdea(i)"><i  class="fa fa-trash-o"></i></button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <div class="card-header bgm-purple">
+                                <h2>Concept <small>Dit kan nog iets specifieker!</small></h2>
+                            </div>
+
+                            <div class="card-body card-padding">
+                                <ul>
+                                    <li data-ng-repeat="i in ideas | filter:{type:'concept'}">
+                                        <span ng-click="modalIdea(i)">
+                                            <strong data-ng-if="i.selected">{{ i.name }}</strong>
+                                            <span data-ng-if="!i.selected">{{ i.name }}</span>
+                                        </span>
+                                        <button data-ng-click="removeIdea(i)"><i  class="fa fa-trash-o"></i></button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <div class="card-header bgm-green">
+                                <h2>Specifiek <small>Hier kunnen we vandaag mee aan de slag.</small></h2>
+                            </div>
+
+                            <div class="card-body card-padding">
+                                <ul>
+                                    <li data-ng-repeat="i in ideas | filter:{type:'specific'}">
+                                        <span ng-click="modalIdea(i)">
+                                            <strong data-ng-if="i.selected">{{ i.name }}</strong>
+                                            <span data-ng-if="!i.selected">{{ i.name }}</span>
+                                        </span>
+                                        <button data-ng-click="removeIdea(i)"><i  class="fa fa-trash-o"></i></button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+            <script type="text/ng-template" id="modalIdeasCtrl.html">
+                <div class="modal-header">
+                    <h3 class="modal-title">{{ idea.name }}</h3>
+                </div>
+                <div class="modal-body">
+
+
+
+                    <form>
+                        <div class="form-group">
+                            <label for="name2">Idee</label>
+                            <input type="text" class="form-control" id="name2" data-ng-model="idea.name" placeholder="Idee" />
+                        </div>
+                        <div class="form-group">
+                            <label for="description2">Toelichting</label>
+                            <textarea class="form-control" id="description2" data-ng-model="idea.description" placeholder="Toelichting"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="type2">Type</label>
+                            <select id="type2" name="type" ng-model="idea.type" class="form-control" required>
+                                <option value="vague">Vaag</option>
+                                <option value="concept">Concept</option>
+                                <option value="specific">Specifiek</option>
+                            </select>
+                        </div>
+                        <!--<div class="form-group">-->
+                            <!--<label for="category2">Categorie</label>-->
+                            <!--<select id="category2" name="category" ng-model="idea.category" class="form-control" required>-->
+                                <!--<option value="partner">Partner</option>-->
+                                <!--<option value="activity">Activiteit</option>-->
+                                <!--<option value="resource">Middel</option>-->
+                                <!--<option value="...">...</option>-->
+                            <!--</select>-->
+                        <!--</div>-->
+                        <div class="checkbox m-b-15">
+                            <label>
+                                <input type="checkbox" data-ng-model="idea.selected" value="true">
+                                <i class="input-helper"></i>
+                                Hebben jullie dit idee gekozen?
+                            </label>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" ng-click="ok(idea)">Opslaan</button>
+                    <button class="btn btn-link" ng-click="cancel()">Annuleren</button>
+                </div>
+            </script>
+
+
+
+
+        </div>
+    </section>
+</section>

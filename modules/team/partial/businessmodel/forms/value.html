@@ -1,0 +1,25 @@
+<h4>Waarde</h4>
+
+<ul>
+    <li data-ng-repeat="p in prodservices | filter:{selected:true}">{{ p.name }}
+        <button data-ng-click="growl(unselectProd(p))" data-ng-if="editableModel"><i class="fa fa-trash-o"></i></button>
+    </li>
+    <!--<form data-ng-if="editableModel">-->
+        <!--<div class="row">-->
+            <!--<div class="col-sm-12">-->
+                <!--<input type="text" class="col-sm-10" data-ng-model="valueproposition.name" placeholder="Nieuwe waarde">-->
+                <!--<button data-ng-click="growl(valuepropositions.$add(valueproposition));valueproposition='';" class="col-sm-2">+</button>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</form>-->
+
+    <form data-ng-if="editableModel">
+        <div class="row">
+            <div class="col-sm-12">
+                <select id="prod" name="prod" ng-model="prod" class="form-control" ng-options="p.name for p in prodservices">
+                </select>
+                <button data-ng-click="selectProd(prod);" class="col-sm-2">+</button>
+            </div>
+        </div>
+    </form>
+</ul>

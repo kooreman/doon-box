@@ -1,0 +1,195 @@
+<header id="header" data-ng-include src="'includes/header.html'" data-ng-controller="headerCtrl as hctrl"></header>
+
+<section id="project">
+    <aside id="sidebar" data-ng-controller="sideBarCtrl" data-ng-include src="'includes/sidebar-left.html'" data-ng-class="{ 'toggled': app.sidebarToggle.left === true }"></aside>
+
+    <!-- <aside id="chat" data-ng-include src="'includes/chat.html'" data-ng-class="{ 'toggled': app.sidebarToggle.right === true }"></aside> -->
+
+    <section id="content">
+
+
+
+        <div class="container" ng-controller="ProjectCtrl">
+            <div class="block-header">
+                <h2>
+                    <a data-ui-sref="project({teamId: authUser.team, projectId : project.$id})" data-ng-click="app.sidebarStat($event)">{{ project.name }}</a> / Overzicht
+                </h2>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12 col-md-12">
+                    <div class="mini-text-item bgm-cyan">
+
+                        <div class="clearfix">
+                            <div class="chart stats-bar">
+                                <i class="zmdi zmdi-hc-4x lineheight-45 zmdi-dot-circle-alt"></i>
+                            </div>
+                            <div class="count" data-ui-sref="goal({teamId: authUser.team, projectId: project.$id})" data-ng-click="app.sidebarStat($event)">
+                                <small>Doelfocus</small>
+                                <h2>{{ project.goalFocus }}</h2>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6 col-md-4">
+                    <div class="card">
+                        <div class="card-header bgm-pink">
+                            <h2>Idee&euml;n <small>Welke pareltjes werken we aan?</small></h2>
+                        </div>
+
+                        <div class="card-body card-padding">
+
+                            <div class="listview">
+                                <a class="lv-item ng-scope" href="" data-ng-repeat="i in ideas  | filter:{selected:true}">
+                                    <div class="media" data-ui-sref="ideas({teamId: authUser.team, projectId: project.$id})" data-ng-click="app.sidebarStat($event)">
+                                        <div class="pull-left">
+                                            <i class="zmdi zmdi-lamp"></i>
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="lv-title ng-binding">{{ i.name }}</div>
+                                            <small class="lv-small ng-binding"></small>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a class="lv-footer" data-ui-sref="ideas({teamId: authUser.team, projectId: project.$id})" data-ng-click="app.sidebarStat($event)">naar meer idee&euml;n</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4">
+                    <div class="card">
+                        <div class="card-header bgm-teal">
+                            <h2>Visie <small>Wat zien we in de wereld?</small></h2>
+
+                            <button class="btn bgm-orange btn-float waves-effect waves-effect"
+                                    data-ui-sref="vision({teamId: authUser.team, projectId: project.$id})" data-ng-click="app.sidebarStat($event)">
+                                <i class="zmdi zmdi-edit"></i>
+                            </button>
+                        </div>
+
+                        <div class="card-body card-padding">
+                            <p data-ng-if="project.vision">{{ project.vision }}</p>
+                            <p data-ng-if="!project.vision"><i>Nog geen visie</i></p>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4">
+                    <div class="card">
+                        <div class="card-header bgm-indigo">
+                            <h2>Missie <small>Wie zijn we en wat zijn onze waarden?</small></h2>
+
+                            <button class="btn bgm-orange btn-float waves-effect waves-effect"
+                                    data-ui-sref="mission({teamId: authUser.team, projectId: project.$id})" data-ng-click="app.sidebarStat($event)">
+                                <i class="zmdi zmdi-edit"></i>
+                            </button>
+                        </div>
+
+                        <div class="card-body card-padding">
+                            <p class="" data-ng-if="project.mission">{{ project.mission }}</p>
+                            <p class="" data-ng-if="!project.mission"><i>Nog geen missie</i></p>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="row">
+
+                <div class="col-sm-6 col-md-4">
+                    <div class="card">
+                        <div class="card-header bgm-cyan">
+                            <h2>Producten en diensten <small>Wat gaan we leveren aan onze klanten?</small></h2>
+                        </div>
+
+                        <div class="card-body card-padding">
+                            <div class="listview">
+
+
+                                <a class="lv-item ng-scope" href="" data-ng-repeat="prod in prodservices">
+                                    <div class="media" data-ui-sref="value({teamId: authUser.team, projectId: project.$id})" data-ng-click="app.sidebarStat($event)">
+                                        <div class="pull-left">
+                                            <i class="zmdi zmdi-cake"></i>
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="lv-title ng-binding">{{ prod.name }}</div>
+                                            <small class="lv-small ng-binding"></small>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a class="lv-footer" data-ui-sref="value({teamId: authUser.team, projectId: project.$id})" data-ng-click="app.sidebarStat($event)">naar onze waardepropositie</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4">
+                    <div class="card">
+                        <div class="card-header bgm-purple">
+                            <h2>Inkomsten <small>Hoe gaan we geld verdienen?</small></h2>
+                        </div>
+
+                        <div class="card-body card-padding">
+                            <div class="listview">
+
+
+                                <a class="lv-item ng-scope" href="" data-ng-repeat="i in incomes">
+                                    <div class="media"  data-ui-sref="businessmodel({teamId: authUser.team, projectId: project.$id})" data-ng-click="app.sidebarStat($event)">
+                                        <div class="pull-left">
+                                            <i class="zmdi zmdi-card"></i>
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="lv-title ng-binding">{{ i.name }}</div>
+                                            <small class="lv-small ng-binding"></small>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a class="lv-footer" data-ui-sref="businessmodel({teamId: authUser.team, projectId: project.$id})" data-ng-click="app.sidebarStat($event)">naar ons businessmodel</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-sm-6 col-md-4">
+                    <div class="card">
+                        <div class="card-header bgm-amber">
+                            <h2>Hypotheses <small>Hoe veroveren we de markt?</small></h2>
+                        </div>
+
+                        <div class="card-body card-padding">
+                            <div class="listview">
+
+
+                                <a class="lv-item ng-scope" href="" data-ng-repeat="h in hypotheses  | orderBy:'priority' | limitTo : 7 : 0">
+                                    <div class="media"  data-ui-sref="experiments({teamId: authUser.team, projectId: project.$id})" data-ng-click="app.sidebarStat($event)">
+                                        <div class="pull-left">
+                                            <i class="zmdi zmdi-card"></i>
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="lv-title ng-binding">Prio {{ h.priority }}: {{ h.name }}</div>
+                                            <small class="lv-small ng-binding"></small>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a class="lv-footer" data-ui-sref="experiments({teamId: authUser.team, projectId: project.$id})" data-ng-click="app.sidebarStat($event)">naar de experimenten</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</section>

@@ -1,0 +1,92 @@
+<header id="header" data-ng-include src="'includes/header.html'" data-ng-controller="headerCtrl as hctrl"></header>
+
+<section id="overview">
+    <aside id="sidebar" data-ng-controller="sideBarCtrl" data-ng-include src="'includes/sidebar-left.html'" data-ng-class="{ 'toggled': app.sidebarToggle.left === true }"></aside>
+
+    <!-- <aside id="chat" data-ng-include src="'includes/chat.html'" data-ng-class="{ 'toggled': app.sidebarToggle.right === true }"></aside> -->
+
+    <section id="content">
+
+
+
+        <div class="container" ng-controller="OverviewCtrl">
+            <div class="block-header">
+                <h2>Projecten</h2>
+            </div>
+
+
+
+
+            <div class="row" data-ng-repeat="p in projects">
+                <div class="col-sm-12 col-md-12">
+                    <div class="mini-text-item bgm-lightgreen">
+
+                        <div class="clearfix">
+                            <div class="chart stats-bar">
+                                <i class="zmdi zmdi-hc-4x lineheight-45 zmdi-trending-up"></i>
+                            </div>
+                            <div class="count" data-ui-sref="project({teamId: authUser.team, projectId: p.$id})" data-ng-click="app.sidebarStat($event)">
+                                <small>Project</small>
+                                <h2>{{ p.name }}</h2>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6 col-md-4">
+                    <div class="card">
+                        <div class="card-header bgm-teal">
+                            <h2>Project starten <small>Weer een nieuwe poging?</small></h2>
+                        </div>
+
+                        <div class="card-body card-padding">
+                            <form data-ng-submit="addProject(p)">
+
+                                <div class="form-group fg-float">
+                                    <div class="fg-line">
+                                        <input type="text" class="form-control fg-input" data-ng-model="p.name">
+                                    </div>
+                                    <label class="fg-label">Naam voor het project</label>
+                                </div>
+
+                                <button class="btn btn-primary">Project toevoegen</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    <div class="card">
+                        <div class="card-header bgm-purple">
+                            <h2>Ons Team <small>Wij zijn de veranderaars.</small></h2>
+                        </div>
+
+                        <div class="card-body card-padding">
+                            <div class="listview">
+
+
+                                <a class="lv-item ng-scope" href="" data-ng-repeat="member in members">
+                                    <div class="media">
+                                        <div class="pull-left">
+                                            <img class="lv-img-sm" data-ng-src="img/profile-pics/2.jpg" alt="" src="img/profile-pics/2.jpg">
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="lv-title ng-binding">{{ member.name }}</div>
+                                            <small class="lv-small ng-binding"></small>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a class="lv-footer" data-ui-sref="myteam({teamId: authUser.team})" data-ng-click="app.sidebarStat($event)">naar mijn team</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</section>

@@ -1,0 +1,38 @@
+<header id="header" data-ng-include src="'includes/header.html'" data-ng-controller="headerCtrl as hctrl"></header>
+
+<section id="main">
+    <aside id="sidebar" data-ng-controller="sideBarCtrl" data-ng-include src="'includes/sidebar-left.html'" data-ng-class="{ 'toggled': app.sidebarToggle.left === true }"></aside>
+
+    <!-- <aside id="chat" data-ng-include src="'includes/chat.html'" data-ng-class="{ 'toggled': app.sidebarToggle.right === true }"></aside> -->
+
+    <section id="content">
+        <div class="container">
+            <div class="col-md-12" ng-controller="TeamsCtrl">
+
+                <h1>Teams</h1>
+                <ul>
+                    <li data-ng-repeat="t in teams">
+                        <h5><a href="#/team/{{ t.id}}">Team #{{ t.id }}</a></h5>
+                        <ul>
+                            <li data-ng-repeat="member in t.members">{{ member.name }}</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>Team aanmaken</h3>
+                <form class="thinborder-well">
+                    <div class="form-group">
+                        <label for="memberName">Naam van eerste teamlid</label>
+                        <input type="text" class="form-control" id="memberName" data-ng-model="member.name" placeholder="Naam" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="memberEmail">Email van eerste teamlid</label>
+                        <input type="email" class="form-control" id="memberEmail" data-ng-model="member.email" placeholder="Email" required/>
+                    </div>
+                    <button data-ng-click="addTeam(member)">Team aanmaken</button>
+                </form>
+
+            </div>
+        </div>
+    </section>
+</section>

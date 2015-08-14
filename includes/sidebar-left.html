@@ -1,0 +1,148 @@
+<div class="sidebar-inner c-overflow">    
+    <div class="profile-menu">
+        <a href="" toggle-submenu>
+            <div class="profile-pic">
+                <img src="img/profile-pics/8.jpg" alt="">
+            </div>
+
+            <div class="profile-info">
+                {{ authUser.name }}
+
+                <i class="zmdi zmdi-caret-down"></i>
+            </div>
+        </a>
+
+        <ul class="main-menu">
+            <!--<li>-->
+                <!--<a href="profile-about.html"><i class="mdi mdi-person"></i> View Profile</a>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<a href=""><i class="mdi mdi-settings-input-antenna"></i> Privacy Settings</a>-->
+            <!--</li>-->
+            <li data-ui-sref-active="myteam">
+                <a data-ui-sref="profilesettings({teamId: authUser.team})" data-ng-click="app.sidebarStat($event)"><i class="zmdi zmdi-account"></i> Instellingen</a>
+            </li>
+            <li data-ui-sref-active="myteam">
+                <a data-ui-sref="myteam({teamId: authUser.team})" data-ng-click="app.sidebarStat($event)"><i class="zmdi zmdi-accounts-alt"></i> Mijn Team</a>
+            </li>
+            <!--<li>-->
+                <!--<a href="#/login/settings"><i class="zmdi zmdi-settings"></i> Instellingen</a>-->
+            <!--</li>-->
+            <li>
+                <a href="#" data-ng-click="logout();"><i class="zmdi zmdi-time-countdown"></i> Uitloggen</a>
+            </li>
+        </ul>
+    </div>
+
+    <ul class="main-menu">
+        <li data-ui-sref-active="active">
+            <a data-ui-sref="overview({teamId: authUser.team})" data-ng-click="app.sidebarStat($event)"><i class="zmdi zmdi-home"></i> Beginpagina</a>
+        </li>
+    </ul>
+
+
+    <ul class="main-menu" data-ng-if="projectId == 0">
+        <li><h4>Projecten</h4></li>
+        <li data-ui-sref-active="active" data-ng-repeat="p in projects">
+            <a data-ui-sref="project({teamId: authUser.team, projectId : p.$id})" data-ng-click="app.sidebarStat($event)"><i class="zmdi zmdi-trending-up"></i> {{ p.name }}</a>
+        </li>
+    </ul>
+
+
+    <ul class="main-menu" data-ng-if="projectId != 0">
+        <li><h4>{{ project.name }}</h4></li>
+
+        <li data-ui-sref-active="active">
+            <a data-ui-sref="goal({teamId: authUser.team, projectId : projectId})" data-ng-click="app.sidebarStat($event)"><i class="zmdi zmdi-dot-circle-alt"></i> Doelfocus</a>
+        </li>
+        <li data-ui-sref-active="active">
+            <a data-ui-sref="ideas({teamId: authUser.team, projectId : projectId})" data-ng-click="app.sidebarStat($event)"><i class="zmdi zmdi-lamp"></i> Ideeëen</a>
+        </li>
+        <li data-ui-sref-active="active">
+            <a data-ui-sref="vision({teamId: authUser.team, projectId : projectId})" data-ng-click="app.sidebarStat($event)"><i class="zmdi zmdi-sun"></i> Visie</a>
+        </li>
+        <li data-ui-sref-active="active">
+            <a data-ui-sref="mission({teamId: authUser.team, projectId : projectId})" data-ng-click="app.sidebarStat($event)"><i class="zmdi zmdi-walk"></i> Missie</a>
+        </li>
+        <li data-ui-sref-active="active">
+            <a data-ui-sref="value({teamId: authUser.team, projectId : projectId})" data-ng-click="app.sidebarStat($event)"><i class="zmdi zmdi-favorite-outline"></i> Waarde</a>
+        </li>
+        <li data-ui-sref-active="active">
+            <a data-ui-sref="businessmodel({teamId: authUser.team, projectId : projectId})" data-ng-click="app.sidebarStat($event)"><i class="zmdi zmdi-shopping-cart"></i> Businessmodel</a>
+        </li>
+        <li data-ui-sref-active="active">
+            <a data-ui-sref="experiments({teamId: authUser.team, projectId : projectId})" data-ng-click="app.sidebarStat($event)"><i class="zmdi zmdi-puzzle-piece"></i> Experimenten</a>
+        </li>
+        <li data-ui-sref-active="active">
+            <a data-ui-sref="projectsettings({teamId: authUser.team, projectId : projectId})" data-ng-click="app.sidebarStat($event)"><i class="zmdi zmdi-edit"></i> Projectinstellingen</a>
+        </li>
+        <!--<li class="sub-menu" data-ng-class="{ 'active toggled': app.$state.includes('widgets') }">-->
+            <!--<a href="" toggle-submenu><i class="zdmi zdmi-now-widgets"></i> Widgets</a>-->
+
+            <!--<ul>-->
+                <!--<li><a data-ui-sref-active="active" data-ui-sref="widgets.widget-templates" data-ng-click="app.sidebarStat($event)">Templates</a></li>-->
+                <!--<li><a data-ui-sref-active="active" data-ui-sref="widgets.widgets" data-ng-click="app.sidebarStat($event)">Widgets</a></li>-->
+            <!--</ul>-->
+        <!--</li>-->
+        <!--<li class="sub-menu" data-ng-class="{ 'active toggled': app.$state.includes('tables') }">-->
+            <!--<a href="" toggle-submenu><i class="zdmi zdmi-view-list"></i> Tables</a>-->
+
+            <!--<ul>-->
+                <!--<li><a data-ui-sref-active="active" data-ui-sref="tables.tables" data-ng-click="app.sidebarStat($event)">Normal Tables</a></li>-->
+                <!--<li><a data-ui-sref-active="active" data-ui-sref="tables.data-tables" data-ng-click="app.sidebarStat($event)">Data Tables</a></li>-->
+            <!--</ul>-->
+        <!--</li>-->
+        <!--<li class="sub-menu" data-ng-class="{ 'active toggled': app.$state.includes('form') }">-->
+            <!--<a href="" toggle-submenu><i class="zdmi zdmi-my-library-books"></i> Forms</a>-->
+
+            <!--<ul>-->
+                <!--<li><a data-ui-sref-active="active" data-ui-sref="form.basic-form-elements" data-ng-click="app.sidebarStat($event)">Basic Form Elements</a></li>-->
+                <!--<li><a data-ui-sref-active="active" data-ui-sref="form.form-components" data-ng-click="app.sidebarStat($event)">Form Components</a></li>-->
+                <!--<li><a data-ui-sref-active="active" data-ui-sref="form.form-examples" data-ng-click="app.sidebarStat($event)">Form Examples</a></li>-->
+                <!--<li><a data-ui-sref-active="active" data-ui-sref="form.form-validations" data-ng-click="app.sidebarStat($event)">Form Validation</a></li>-->
+            <!--</ul>-->
+        <!--</li>-->
+
+        <!--<li class="sub-menu" data-ng-class="{ 'active toggled': app.$state.includes('user-interface') }">-->
+            <!--<a href="" toggle-submenu><i class="zdmi zdmi-swap-calls"></i>User Interface</a>-->
+            <!--<ul>-->
+                <!--<li><a data-ui-sref-active="active" data-ui-sref="user-interface.colors" data-ng-click="app.sidebarStat($event)">Colors</a></li>-->
+                <!--<li><a data-ui-sref-active="active" data-ui-sref="user-interface.animations" data-ng-click="app.sidebarStat($event)">Animations</a></li>-->
+                <!--<li><a data-ui-sref-active="active" data-ui-sref="user-interface.box-shadow" data-ng-click="app.sidebarStat($event)">Box Shadow</a></li>-->
+                <!--<li><a data-ui-sref-active="active" data-ui-sref="user-interface.buttons" data-ng-click="app.sidebarStat($event)">Buttons</a></li>-->
+                <!--<li><a data-ui-sref-active="active" data-ui-sref="user-interface.icons" data-ng-click="app.sidebarStat($event)">Icons</a></li>-->
+                <!--<li><a data-ui-sref-active="active" data-ui-sref="user-interface.alerts" data-ng-click="app.sidebarStat($event)">Alerts</a></li>-->
+                <!--<li><a data-ui-sref-active="active" data-ui-sref="user-interface.notifications-dialogs" data-ng-click="app.sidebarStat($event)">Notifications & Dialogs</a></li>-->
+                <!--<li><a data-ui-sref-active="active" data-ui-sref="user-interface.media" data-ng-click="app.sidebarStat($event)">Media</a></li>-->
+                <!--<li><a data-ui-sref-active="active" data-ui-sref="user-interface.components" data-ng-click="app.sidebarStat($event)">Components</a></li>-->
+                <!--<li><a data-ui-sref-active="active" data-ui-sref="user-interface.other-components" data-ng-click="app.sidebarStat($event)">Others</a></li>-->
+            <!--</ul>-->
+        <!--</li>-->
+        <!--<li class="sub-menu" data-ng-class="{ 'active toggled': app.$state.includes('charts') }">-->
+            <!--<a href="" toggle-submenu><i class="zdmi zdmi-trending-up"></i>Charts</a>-->
+            <!--<ul>-->
+                <!--<li><a data-ui-sref-active="active" data-ui-sref="charts.flot-charts" data-ng-click="app.sidebarStat($event)">Flot Charts</a></li>-->
+                <!--<li><a data-ui-sref-active="active" data-ui-sref="charts.other-charts" data-ng-click="app.sidebarStat($event)">Other Charts</a></li>-->
+            <!--</ul>-->
+        <!--</li>-->
+
+        <!--<li data-ui-sref-active="active">-->
+            <!--<a data-ui-sref="calendar" data-ng-click="app.sidebarStat($event)"><i class="zdmi zdmi-today"></i> Calendar</a>-->
+        <!--</li>-->
+
+        <!--<li data-ui-sref-active="active">-->
+            <!--<a data-ui-sref="generic-classes" data-ng-click="app.sidebarStat($event)"><i class="zdmi zdmi-layers"></i> Generic Classes</a>-->
+        <!--</li>-->
+
+        <!--<li class="sub-menu" data-ng-class="{ 'active toggled': app.$state.includes('pages') }">-->
+            <!--<a href="" toggle-submenu><i class="zdmi zdmi-content-copy"></i> Sample Pages</a>-->
+            <!--<ul>-->
+                <!--<li><a data-ui-sref-active="active" data-ui-sref="pages.profile.profile-about" data-ng-click="app.sidebarStat($event)">Profile</a></li>-->
+                <!--<li><a data-ui-sref-active="active" data-ui-sref="pages.listview" data-ng-click="app.sidebarStat($event)">List View</a></li>-->
+                <!--<li><a data-ui-sref-active="active" data-ui-sref="pages.messages" data-ng-click="app.sidebarStat($event)">Messages</a></li>-->
+                <!--<li><a href="login.html">Login and Sign Up</a></li>-->
+                <!--<li><a href="404.html">Error 404</a></li>-->
+            <!--</ul>-->
+        <!--</li>-->
+    </ul>
+</div>

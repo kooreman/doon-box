@@ -1,0 +1,60 @@
+<header id="header" data-ng-include src="'includes/header.html'" data-ng-controller="headerCtrl as hctrl"></header>
+
+<section id="project">
+    <aside id="sidebar" data-ng-controller="sideBarCtrl" data-ng-include src="'includes/sidebar-left.html'" data-ng-class="{ 'toggled': app.sidebarToggle.left === true }"></aside>
+
+    <!-- <aside id="chat" data-ng-include src="'includes/chat.html'" data-ng-class="{ 'toggled': app.sidebarToggle.right === true }"></aside> -->
+
+    <section id="content">
+
+
+
+        <div class="container" ng-controller="ProjectsettingsCtrl">
+            <div class="block-header">
+                <h2>
+                    <a data-ui-sref="project({teamId: authUser.team, projectId : project.$id})" data-ng-click="app.sidebarStat($event)">{{ project.name }}</a> / Instellingen
+                </h2>
+            </div>
+
+
+            <div class="row">
+                <div class="col-sm-6 col-md-4">
+                    <div class="card">
+                        <div class="card-header bgm-pink">
+                            <h2>Naam project <small>Hoe zullen we het eens noemen?</small></h2>
+                        </div>
+
+                        <div class="card-body card-padding">
+                            <form data-ng-submit="saveProject()">
+
+                                <p class="c-black f-500 m-b-20">Naam project</p>
+                                <div class="form-group fg-float">
+                                    <div class="fg-line">
+                                        <input type="text" class="form-control fg-input" data-ng-model="project.name" >
+                                    </div>
+
+                                </div>
+
+                                <button type="submit" class="btn-primary btn">Project opslaan</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4">
+                    <div class="card">
+                        <div class="card-header bgm-teal">
+                            <h2>Extra opties <small>Wat kunnen we nog meer?</small></h2>
+                        </div>
+
+                        <div class="card-body card-padding">
+                            <button data-ng-click="removeProject()" class="btn-danger btn">Verwijder dit project</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+</section>

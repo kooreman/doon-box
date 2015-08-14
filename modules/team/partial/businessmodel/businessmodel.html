@@ -1,0 +1,789 @@
+<header id="header" data-ng-include src="'includes/header.html'" data-ng-controller="headerCtrl as hctrl"></header>
+
+<section id="main">
+    <aside id="sidebar" data-ng-controller="sideBarCtrl" data-ng-include src="'includes/sidebar-left.html'" data-ng-class="{ 'toggled': app.sidebarToggle.left === true }"></aside>
+
+    <!-- <aside id="chat" data-ng-include src="'includes/chat.html'" data-ng-class="{ 'toggled': app.sidebarToggle.right === true }"></aside> -->
+
+<section id="content">
+
+<div class="container" id="businessmodel" ng-controller="BusinessModelCtrl">
+    <div class="block-header" >
+        <h2><a data-ui-sref="project({teamId: authUser.team, projectId : project.$id})" data-ng-click="app.sidebarStat($event)">{{ project.name }}</a> / Businessmodel</h2>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <accordion close-others="oneAtATime">
+                <accordion-group is-open="status.openStep1" heading="Stap 1: Uitleg">
+                    <p>
+                        De businessmodel plaat helpt je om de belangrijkste onderdelen van jouw businessmodel uit te werken. Is jouw idee alleen
+                        maar een hobby, of kan je er een echt bedrijf van maken? Aan de hand van de negen vakken op de plaat, maak je duidelijk
+                        hoe jouw bedrijf waarde maakt, deze waarde levert aan je klanten en hoe je hiermee geld gaat verdienen.
+                    </p>
+                    <p>
+                        Deze plaat is het eerste ontwerp van je businessmodel. Deze maak je op basis van wat je vandaag weet over bijvoorbeeld
+                        je klanten. Naarmate je meer klanten spreekt en je product of dienst maakt, leer je steeds meer over alle negen vakken.
+                        Werk de vakken dan ook bij als je iets nieuws leert!
+                    </p>
+
+                    <h3>Hoe stel je je businessmodel op?</h3>
+                    <ol>
+                        <li>
+                            In de vorige stap heb je beschreven welk product en of dienst je gaat maken. Ook heb je bepaald aan wie je dat wil
+                            gaan leveren, en waarom. Zet je product en of dienst in het vak <i>waarde</i> en de taak van je klant in het vak
+                            <i>taak die gedaan moet worden</i></i>
+                        </li>
+                        <li>
+                            Schrijf nu in het vak <i>relaties</i> op hoe je de relatie met je klant wil gaan onderhouden. Ga je met je klanten elke
+                            twee maanden bij elkaar komen? Stuur je ze jaarlijks een cadeau? Help je ze persoonlijk?
+                        </li>
+                        <li>
+                            Schrijf in het vak <i>kanalen</i> op hoe je jouw product en of dienst gaat leveren aan je klanten en hoe je klanten gaat
+                            benaderen. Dit kan online zijn, maar ook bijvoorbeeld via een winkel, met de post of zelfs via de telefoon.
+                        </li>
+                        <li>
+                            Denk nu na over hoe je hier geld aan gaat verdienen, en schrijf dit op in het vak inkomsten. Betalen je klanten per
+                            product, per uur, of betalen ze een vast bedrag per maand. Of juist heel iets anders?
+                        </li>
+                        <li>
+                            Bepaal nu wat je zelf moet gaan doen, en wat je moet gaan inkopen, om jouw product en of dienst te kunnen leveren.
+                            Schrijf dat op bij (jouw) activiteiten. Schrijf bij strategische partners op wat je wil gaan inkopen, en bij wie.
+                        </li>
+                        <li>
+                            Schrijf nu in het vak mensen en middelen op wat en wie je nodig hebt om de activiteiten uit te voeren en wat je
+                            nodig hebt om samen te werken met je partners. Vergeet niet: Je kan er altijd voor kiezen om activiteiten uit
+                            te laten voeren door strategische partners!
+                        </li>
+                        <li>
+                            Als laatste moet je nu opschrijven welke kosten je maakt. Dingen die je inkoopt bij partners kosten geld,
+                            maar ook de activiteiten, mensen en middelen, het onderhouden van relaties en de kanalen die je gebruikt.
+                            Vergeet ook de vaste kosten niet, zoals voor je winkel of je kantoor.
+                        </li>
+                    </ol>
+                    <p>
+                        Je hebt nu een eerste versie van je businessmodel gemaakt. Bij het opstellen van dit businessmodel heb je
+                        waarschijnlijk veel aannames gemaakt. Bijvoorbeeld over de partners waarmee je samen gaat werken, of zelfs
+                        over hoe je jouw toekomstige klanten gaat helpen. Door met mogelijke klanten in gesprek te gaan, of zelfs
+                        door alvast te proberen jouw product of dienst te leveren, leer je steeds meer over je klant, en jouw
+                        businessmodel.
+                    </p>
+
+                    <button class="pull-right btn btn-info" data-ng-click="status.openStep1 = false;">Starten <i class="zmdi zmdi-arrow-right"></i></button>
+                </accordion-group>
+            </accordion>
+        </div>
+    </div>
+
+
+    <!--<div class="row">-->
+        <!--<div  class="col-md-6" >-->
+            <!--<accordion close-others="oneAtATime">-->
+
+                <!--<accordion-group is-open="status.openStep1" heading="Stap 1: Uitleg">-->
+                    <!--<h3>Hoe stel je je businessmodel op?</h3>-->
+                    <!--<ol>-->
+                        <!--<li>waarde</li>-->
+                        <!--<li>job</li>-->
+                        <!--<li>etc</li>-->
+                    <!--</ol>-->
+
+                    <!--<button class="pull-right btn btn-info" data-ng-click="status.openStep1 = false; status.openStep2 = true;">Volgende stap <i class="zmdi zmdi-arrow-right"></i></button>-->
+                <!--</accordion-group>-->
+                <!--<accordion-group is-open="status.openStep2" heading="Stap 2: Waardepropositie">-->
+                    <!--<h2>Waardepropositie</h2>-->
+
+                    <!--<ul>-->
+                        <!--<li data-ng-repeat="v in valuepropositions"><span data-ng-click="valuepModal(v)">{{ v.name }}</span>-->
+                            <!--<button data-ng-click="valuepropositions.$remove(v)"><i class="fa fa-trash-o"></i></button>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+
+                    <!--<form>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="valuepName">Waardepropositie</label>-->
+                            <!--<input type="text" class="form-control" id="valuepName" data-ng-model="valueproposition.name" placeholder="Naam" />-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="valuepDescr">Toelichting</label>-->
+                            <!--<textarea class="form-control" id="valuepDescr" data-ng-model="valueproposition.description" placeholder="Toelichting"></textarea>-->
+                        <!--</div>-->
+                        <!--<button class="btn btn-default" data-ng-click="valuepropositions.$add(valueproposition); valueproposition ='';">Valuep toevoegen</button>-->
+                    <!--</form>-->
+
+                    <!--&lt;!&ndash; modal per valuep &ndash;&gt;-->
+                    <!--<script type="text/ng-template" id="ValuepModalCtrl.html">-->
+
+                        <!--<div class="modal-header">-->
+                            <!--<h3 class="modal-title">{{ valueproposition.name }}</h3>-->
+                        <!--</div>-->
+                        <!--<div class="modal-body">-->
+                            <!--<form>-->
+                                <!--<div class="form-group">-->
+                                    <!--<label for="valuepName2">Valuep</label>-->
+                                    <!--<input type="text" class="form-control" id="valuepName2" data-ng-model="valueproposition.name" placeholder="Naam" />-->
+                                <!--</div>-->
+                                <!--<div class="form-group">-->
+                                    <!--<label for="valuepDescr2">Toelichting</label>-->
+                                    <!--<textarea class="form-control" id="valuepDescr2" data-ng-model="valueproposition.description" placeholder="Toelichting"></textarea>-->
+                                <!--</div>-->
+                            <!--</form>-->
+
+                        <!--</div>-->
+                        <!--<div class="modal-footer">-->
+                            <!--<button class="btn btn-primary" ng-click="ok(valueproposition)">Klaar!</button>-->
+                            <!--&lt;!&ndash;<button class="btn btn-warning" ng-click="cancel()">Cancel</button>&ndash;&gt;-->
+                        <!--</div>-->
+                    <!--</script>-->
+
+
+
+                <!--</accordion-group>-->
+                <!--<accordion-group is-open="status.openStep3" heading="Stap 3: Taak die gedaan moet worden">-->
+
+                    <!--<ul>-->
+                        <!--<li data-ng-repeat="j in jobsToBeDone | filter:{selected:true}"><span>{{ j.name }} </span>-->
+                            <!--<button data-ng-click="unselectJob(j)"><i class="fa fa-trash-o"></i></button>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+
+                    <!--<form>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="job2">Taak die gedaan moet worden</label>-->
+                            <!--<select id="job2" name="job" ng-model="job" class="form-control" ng-options="j.name for j in jobsToBeDone">-->
+                            <!--</select>-->
+                        <!--</div>-->
+                        <!--<button data-ng-click="selectJob(job)">Toevoegen</button>-->
+                    <!--</form>-->
+
+                <!--</accordion-group>-->
+                <!--<accordion-group is-open="status.openStep4" heading="Stap 4: Relaties">-->
+                    <!--<h2>Relaties</h2>-->
+
+                    <!--<div data-ng-if="relations.length > 0">-->
+                        <!--<ul>-->
+                            <!--<li data-ng-repeat="r in relations"><span>{{ r.name }}, {{ r.amount }} &euro;, aantal: {{ r.quantity }}, per: {{ r.timeframe }} </span>-->
+                                <!--<button data-ng-click="relations.$remove(r)"><i class="fa fa-trash-o"></i></button>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</div>-->
+
+
+                    <!--<h4>Toevoegen relatie</h4>-->
+                    <!--<form class="thinborder-well">-->
+
+                        <!--<div class="form-group">-->
+                            <!--<label for="relationName">Naam relatie</label>-->
+                            <!--<input type="text" class="form-control" id="relationName" data-ng-model="r.name" placeholder="Naam" />-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="relationDescr">Toelichting</label>-->
+                            <!--<textarea class="form-control" id="relationDescr" data-ng-model="r.description" placeholder="Toelichting"></textarea>-->
+                        <!--</div>-->
+
+                        <!--<h3>Kosten</h3>-->
+
+                        <!--<div class="form-group">-->
+                            <!--<label for="relationPrice">Kosten (&euro;)</label>-->
+                            <!--<input type="text" class="form-control" id="relationPrice" data-ng-model="r.amount" placeholder="" />-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="relationNumber">Aantal</label>-->
+                            <!--<input type="text" class="form-control" id="relationNumber" data-ng-model="r.quantity" placeholder="" />-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="relationTimeFrame">Per</label>-->
+                            <!--<select id="relationTimeFrame" name="job" ng-model="r.timeframe" class="form-control" required>-->
+                                <!--<option value="d">Dag</option>-->
+                                <!--<option value="m">Maand</option>-->
+                                <!--<option value="y">Jaar</option>-->
+                                <!--<option value="e">Stuk</option>-->
+                                <!--<option value="o">Eenmalig</option>-->
+                            <!--</select>-->
+                        <!--</div>-->
+
+
+                        <!--<button data-ng-click="relations.$add(r); r ='';">Toevoegen</button>-->
+                    <!--</form>-->
+
+
+                <!--</accordion-group>-->
+                <!--<accordion-group is-open="status.openStep5" heading="Stap 5: Kanalen">-->
+                    <!--<h2>Kanalen</h2>-->
+
+                    <!--<div data-ng-if="channels.length > 0">-->
+                        <!--<ul>-->
+                            <!--<li data-ng-repeat="c in channels"><span>{{ c.name }}, {{ c.amount }} &euro;, aantal: {{ c.quantity }}, per: {{ c.timeframe }} </span>-->
+                                <!--<button data-ng-click="channels.$remove(c)"><i class="fa fa-trash-o"></i></button>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</div>-->
+
+
+                    <!--<h4>Toevoegen kanaal</h4>-->
+                    <!--<form class="thinborder-well">-->
+
+                        <!--<div class="form-group">-->
+                            <!--<label for="channelName">Naam kanaal</label>-->
+                            <!--<input type="text" class="form-control" id="channelName" data-ng-model="c.name" placeholder="Naam" />-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="channelDescr">Toelichting</label>-->
+                            <!--<textarea class="form-control" id="channelDescr" data-ng-model="c.description" placeholder="Toelichting"></textarea>-->
+                        <!--</div>-->
+
+                        <!--<h3>Kosten</h3>-->
+
+                        <!--<div class="form-group">-->
+                            <!--<label for="channelPrice">Kosten (&euro;)</label>-->
+                            <!--<input type="text" class="form-control" id="channelPrice" data-ng-model="c.amount" placeholder="" />-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="channelNumber">Aantal</label>-->
+                            <!--<input type="text" class="form-control" id="channelNumber" data-ng-model="c.quantity" placeholder="" />-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="channelTimeFrame">Per</label>-->
+                            <!--<select id="channelTimeFrame" name="job" ng-model="c.timeframe" class="form-control" required>-->
+                                <!--<option value="d">Dag</option>-->
+                                <!--<option value="m">Maand</option>-->
+                                <!--<option value="y">Jaar</option>-->
+                                <!--<option value="e">Stuk</option>-->
+                                <!--<option value="o">Eenmalig</option>-->
+                            <!--</select>-->
+                        <!--</div>-->
+
+
+                        <!--<button data-ng-click="channels.$add(c)">Toevoegen</button>-->
+                    <!--</form>-->
+
+                <!--</accordion-group>-->
+            <!--</accordion>-->
+        <!--</div>-->
+        <!--<div class="col-md-6" >-->
+            <!--<accordion close-others="oneAtATime">-->
+                <!--<accordion-group is-open="status.openStep6" heading="Stap 6: Inkomsten">-->
+                    <!--<h2>Inkomsten</h2>-->
+
+                    <!--<div data-ng-if="incomes.length > 0">-->
+                        <!--<ul>-->
+                            <!--<li data-ng-repeat="i in incomes"><span>{{ i.name }}, {{ i.amount }} &euro;, aantal: {{ i.quantity }}, per: {{ i.timeframe }} </span>-->
+                                <!--<button data-ng-click="incomes.$remove(i)"><i class="fa fa-trash-o"></i></button>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</div>-->
+
+
+                    <!--<h4>Toevoegen inkomsten</h4>-->
+
+
+
+
+                    <!--<form class="thinborder-well">-->
+
+                        <!--<div class="form-group">-->
+                            <!--<label for="valuepProdService">Naam inkomsten</label>-->
+                            <!--<input type="text" class="form-control" id="valuepProdService" data-ng-model="income.name" placeholder="Naam" />-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="valuepProdServiceDescr">Toelichting</label>-->
+                            <!--<textarea class="form-control" id="valuepProdServiceDescr" data-ng-model="income.description" placeholder="Toelichting"></textarea>-->
+                        <!--</div>-->
+
+                        <!--<h3>Opbrengsten</h3>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="valuepProdServicePrice">Prijs (&euro;)</label>-->
+                            <!--<input type="text" class="form-control" id="valuepProdServicePrice" data-ng-model="income.amount" placeholder="" />-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="valuepProdServiceNumber">Aantal</label>-->
+                            <!--<input type="text" class="form-control" id="valuepProdServiceNumber" data-ng-model="income.quantity" placeholder="" />-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="valuepProdServiceTimeframe">Per</label>-->
+                            <!--<select id="valuepProdServiceTimeframe" name="job" ng-model="income.timeframe" class="form-control" required>-->
+                                <!--<option value="d">Dag</option>-->
+                                <!--<option value="m">Maand</option>-->
+                                <!--<option value="y">Jaar</option>-->
+                                <!--<option value="e">Stuk</option>-->
+                                <!--<option value="o">Eenmalig</option>-->
+                            <!--</select>-->
+                        <!--</div>-->
+
+
+                        <!--<button data-ng-click="incomes.$add(income)">Toevoegen</button>-->
+                    <!--</form>-->
+
+                <!--</accordion-group>-->
+                <!--<accordion-group is-open="status.openStep7" heading="Stap 7: Activiteiten">-->
+                    <!--<h2>Activiteiten</h2>-->
+
+                    <!--<div data-ng-if="activities.length > 0">-->
+                        <!--<ul>-->
+                            <!--<li data-ng-repeat="a in activities"><span>{{ a.name }}, {{ a.amount }} &euro;, aantal: {{ a.quantity }}, per: {{ a.timeframe }} </span>-->
+                                <!--<button data-ng-click="activities.$remove(a)"><i class="fa fa-trash-o"></i></button>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</div>-->
+
+
+                    <!--<h4>Toevoegen Activiteit</h4>-->
+                    <!--<form class="thinborder-well">-->
+
+                        <!--<div class="form-group">-->
+                            <!--<label for="activityName">Naam activiteit</label>-->
+                            <!--<input type="text" class="form-control" id="activityName" data-ng-model="a.name" placeholder="Naam" />-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="activityDescr">Toelichting</label>-->
+                            <!--<textarea class="form-control" id="activityDescr" data-ng-model="a.description" placeholder="Toelichting"></textarea>-->
+                        <!--</div>-->
+
+                        <!--<h3>Kosten</h3>-->
+
+                        <!--<div class="form-group">-->
+                            <!--<label for="activityPrice">Kosten (&euro;)</label>-->
+                            <!--<input type="text" class="form-control" id="activityPrice" data-ng-model="a.amount" placeholder="" />-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="activityNumber">Aantal</label>-->
+                            <!--<input type="text" class="form-control" id="activityNumber" data-ng-model="a.quantity" placeholder="" />-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="activityTimeFrame">Per</label>-->
+                            <!--<select id="activityTimeFrame" name="job" ng-model="a.timeframe" class="form-control" required>-->
+                                <!--<option value="d">Dag</option>-->
+                                <!--<option value="m">Maand</option>-->
+                                <!--<option value="y">Jaar</option>-->
+                                <!--<option value="e">Stuk</option>-->
+                                <!--<option value="o">Eenmalig</option>-->
+                            <!--</select>-->
+                        <!--</div>-->
+
+
+                        <!--<button data-ng-click="activities.$add(a)">Toevoegen</button>-->
+                    <!--</form>-->
+                <!--</accordion-group>-->
+                <!--<accordion-group is-open="status.openStep8" heading="Stap 8: Middelen">-->
+                    <!--<h2>Middelen</h2>-->
+
+                    <!--<div data-ng-if="resources.length > 0">-->
+                        <!--<ul>-->
+                            <!--<li data-ng-repeat="r in resources"><span>{{ r.name }}, {{ r.amount }} &euro;, aantal: {{ r.quantity }}, per: {{ r.timeframe }} </span>-->
+                                <!--<button data-ng-click="resources.$remove(r)"><i class="fa fa-trash-o"></i></button>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</div>-->
+
+
+                    <!--<h4>Toevoegen Middel</h4>-->
+                    <!--<form class="thinborder-well">-->
+
+                        <!--<div class="form-group">-->
+                            <!--<label for="resourceName">Naam middel</label>-->
+                            <!--<input type="text" class="form-control" id="resourceName" data-ng-model="r.name" placeholder="Naam" />-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="resourceDescr">Toelichting</label>-->
+                            <!--<textarea class="form-control" id="resourceDescr" data-ng-model="r.description" placeholder="Toelichting"></textarea>-->
+                        <!--</div>-->
+
+                        <!--<h3>Kosten</h3>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="resourcePrice">Prijs (&euro;)</label>-->
+                            <!--<input type="text" class="form-control" id="resourcePrice" data-ng-model="r.amount" placeholder="" />-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="resourceNumber">Aantal</label>-->
+                            <!--<input type="text" class="form-control" id="resourceNumber" data-ng-model="r.quantity" placeholder="" />-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="resourceTimeFrame">Per</label>-->
+                            <!--<select id="resourceTimeFrame" name="job" ng-model="r.timeframe" class="form-control" required>-->
+                                <!--<option value="d">Dag</option>-->
+                                <!--<option value="m">Maand</option>-->
+                                <!--<option value="y">Jaar</option>-->
+                                <!--<option value="e">Stuk</option>-->
+                                <!--<option value="o">Eenmalig</option>-->
+                            <!--</select>-->
+                        <!--</div>-->
+
+
+                        <!--<button data-ng-click="resources.$add(r)">Toevoegen</button>-->
+                    <!--</form>-->
+                <!--</accordion-group>-->
+                <!--<accordion-group is-open="status.openStep9" heading="Stap 9: Strategische partners">-->
+
+                    <!--<h2>Partners</h2>-->
+                    <!--<ul>-->
+                        <!--<li data-ng-repeat="p in partners"><span data-ng-click="partnerModal(p)">{{ p.name }}</span>-->
+                            <!--<button data-ng-click="partners.$remove(p)"><i class="fa fa-trash-o"></i></button>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+
+                    <!--<form>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="partnerName">Partner</label>-->
+                            <!--<input type="text" class="form-control" id="partnerName" data-ng-model="partner.name" placeholder="Naam" />-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="partnerDescr">Toelichting</label>-->
+                            <!--<textarea class="form-control" id="partnerDescr" data-ng-model="partner.description" placeholder="Toelichting"></textarea>-->
+                        <!--</div>-->
+                        <!--<button class="btn btn-default" data-ng-click="partners.$add(partner);">Partner toevoegen</button>-->
+                    <!--</form>-->
+
+                    <!--&lt;!&ndash; modal per partner &ndash;&gt;-->
+                    <!--<script type="text/ng-template" id="PartnerModalCtrl.html">-->
+                        <!--{{ partner }}-->
+                        <!--<div class="modal-header">-->
+                            <!--<h3 class="modal-title">{{ partner.name }}</h3>-->
+                        <!--</div>-->
+                        <!--<div class="modal-body">-->
+                            <!--<form>-->
+                                <!--<div class="form-group">-->
+                                    <!--<label for="partnerName2">Partner</label>-->
+                                    <!--<input type="text" class="form-control" id="partnerName2" data-ng-model="partner.name" placeholder="Naam" />-->
+                                <!--</div>-->
+                                <!--<div class="form-group">-->
+                                    <!--<label for="partnerDescr2">Toelichting</label>-->
+                                    <!--<textarea class="form-control" id="partnerDescr2" data-ng-model="partner.description" placeholder="Toelichting"></textarea>-->
+                                <!--</div>-->
+                                <!--<button data-ng-click="partners.$save(partner)">Opslaan</button>-->
+                            <!--</form>-->
+
+                            <!--<div data-ng-if="partner.products.length > 0">-->
+                                <!--<h4>Inkoop van partner</h4>-->
+                                <!--<ul>-->
+                                    <!--<li data-ng-repeat="product in partner.products"><span data-ng-click="partnerModal(p)">{{ product.name }}, {{ product.amount }} &euro;, aantal: {{ product.quantity }}, per: {{ product.timeframe }} </span>-->
+                                        <!--<button data-ng-click="removePartnerProduct(partner, product)"><i class="fa fa-trash-o"></i></button>-->
+                                    <!--</li>-->
+                                <!--</ul>-->
+                            <!--</div>-->
+
+
+                            <!--<h4>Toevoegen inkoop product/dienst</h4>-->
+                            <!--<form class="thinborder-well">-->
+
+                                <!--<div class="form-group">-->
+                                    <!--<label for="partnerProdService">Naam product/dienst</label>-->
+                                    <!--<input type="text" class="form-control" id="partnerProdService" data-ng-model="product.name" placeholder="Naam" />-->
+                                <!--</div>-->
+                                <!--<div class="form-group">-->
+                                    <!--<label for="partnerProdServiceDescr">Toelichting</label>-->
+                                    <!--<textarea class="form-control" id="partnerProdServiceDescr" data-ng-model="product.description" placeholder="Toelichting"></textarea>-->
+                                <!--</div>-->
+
+                                <!--<h3>Kosten</h3>-->
+                                <!--<div class="form-group">-->
+                                    <!--<label for="partnerProdServicePrice">Prijs (&euro;)</label>-->
+                                    <!--<input type="text" class="form-control" id="partnerProdServicePrice" data-ng-model="product.amount" placeholder="" />-->
+                                <!--</div>-->
+                                <!--<div class="form-group">-->
+                                    <!--<label for="partnerProdServiceNumber">Aantal</label>-->
+                                    <!--<input type="text" class="form-control" id="partnerProdServiceNumber" data-ng-model="product.quantity" placeholder="" />-->
+                                <!--</div>-->
+                                <!--<div class="form-group">-->
+                                    <!--<label for="partnerProdServiceTimeframe">Per</label>-->
+                                    <!--<select id="partnerProdServiceTimeframe" name="job" ng-model="product.timeframe" class="form-control" required>-->
+                                        <!--<option value="d">Dag</option>-->
+                                        <!--<option value="m">Maand</option>-->
+                                        <!--<option value="y">Jaar</option>-->
+                                        <!--<option value="e">Stuk</option>-->
+                                        <!--<option value="o">Eenmalig</option>-->
+                                    <!--</select>-->
+                                <!--</div>-->
+
+
+                                <!--<button data-ng-click="addPartnerProduct(partner, product)">Toevoegen</button>-->
+                            <!--</form>-->
+
+                        <!--</div>-->
+                        <!--<div class="modal-footer">-->
+                            <!--<button class="btn btn-primary" ng-click="ok(partner)">Klaar!</button>-->
+                            <!--&lt;!&ndash;<button class="btn btn-warning" ng-click="cancel()">Cancel</button>&ndash;&gt;-->
+                        <!--</div>-->
+                    <!--</script>-->
+
+
+
+
+                <!--</accordion-group>-->
+                <!--<accordion-group is-open="status.openStep10" heading="Stap 10: Kosten">-->
+                    <!--<h2>Kosten</h2>-->
+
+                    <!--<div data-ng-if="costs.length > 0">-->
+                        <!--<ul>-->
+                            <!--<li data-ng-repeat="c in costs"><span>{{ c.name }}, {{ c.amount }} &euro;, aantal: {{ c.quantity }}, per: {{ c.timeframe }} </span>-->
+                                <!--<button data-ng-click="costs.$remove(c)"><i class="fa fa-trash-o"></i></button>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</div>-->
+
+
+                    <!--<h4>Toevoegen kostenpost</h4>-->
+                    <!--<form class="thinborder-well">-->
+
+                        <!--<div class="form-group">-->
+                            <!--<label for="costName">Naam kosten</label>-->
+                            <!--<input type="text" class="form-control" id="costName" data-ng-model="c.name" placeholder="Naam" />-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="costDescr">Toelichting</label>-->
+                            <!--<textarea class="form-control" id="costDescr" data-ng-model="c.description" placeholder="Toelichting"></textarea>-->
+                        <!--</div>-->
+
+                        <!--<h3>Kosten</h3>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="costPrice">Prijs (&euro;)</label>-->
+                            <!--<input type="text" class="form-control" id="costPrice" data-ng-model="c.amount" placeholder="" />-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="costNumber">Aantal</label>-->
+                            <!--<input type="text" class="form-control" id="costNumber" data-ng-model="c.quantity" placeholder="" />-->
+                        <!--</div>-->
+                        <!--<div class="form-group">-->
+                            <!--<label for="costTimeFrame">Per</label>-->
+                            <!--<select id="costTimeFrame" name="job" ng-model="c.timeframe" class="form-control" required>-->
+                                <!--<option value="d">Dag</option>-->
+                                <!--<option value="m">Maand</option>-->
+                                <!--<option value="y">Jaar</option>-->
+                                <!--<option value="e">Stuk</option>-->
+                                <!--<option value="o">Eenmalig</option>-->
+                            <!--</select>-->
+                        <!--</div>-->
+
+
+                        <!--<button data-ng-click="costs.$add(c); c = '';">Toevoegen</button>-->
+                    <!--</form>-->
+                <!--</accordion-group>-->
+
+            <!--&lt;!&ndash;<accordion-group heading="Financieel overzicht">&ndash;&gt;-->
+            <!--&lt;!&ndash;<h2>Financieel overzicht</h2>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="col-md-6">&ndash;&gt;-->
+            <!--&lt;!&ndash;<h4>Kosten</h4>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<h4>Partners</h4>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div data-ng-repeat="p in partners">&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="row" data-ng-repeat="product in p.products">&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="col-md-6">{{ p.name }}</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="col-md-6">{{product.name }}, {{ product.amount }} &euro;, aantal: {{ product.quantity }}, per: {{ product.timeframe }}</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;&lt;!&ndash; subtotaal berekenen &ndash;&gt;&ndash;&gt;-->
+
+            <!--&lt;!&ndash;&lt;!&ndash; next! &ndash;&gt;&ndash;&gt;-->
+
+
+            <!--&lt;!&ndash;&lt;!&ndash; functie om te berekenen totaal &ndash;&gt;&ndash;&gt;-->
+
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="col-md-6">&ndash;&gt;-->
+            <!--&lt;!&ndash;<h4>Baten</h4>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+
+            <!--&lt;!&ndash;</accordion-group>&ndash;&gt;-->
+            <!--</accordion>-->
+        <!--</div>-->
+
+    <!--</div>-->
+
+
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bgm-cyan">
+                    <h2>Businessmodel <small>Hoe gaan we de wereld verbeteren?</small></h2>
+                </div>
+
+                <div class="card-body card-padding">
+
+                    <div class="toggle-switch">
+                        <label for="ts1" class="ts-label">Businessmodel bewerken</label>
+                        <input id="ts1" data-ng-model="editableModel" type="checkbox" hidden="hidden">
+                        <label for="ts1" class="ts-helper"></label>
+                    </div>
+
+                    <br/>
+                    <br/>
+
+                    <table class="canvas hidden-xs hidden-sm">
+                        <tr>
+                            <td class="twenty businessmodelelement">
+                                <div data-ng-include src="'modules/team/partial/businessmodel/forms/partner.html'" ></div>
+                            </td>
+                            <td class="twenty">
+                                <table class="canvas">
+                                    <tr>
+                                        <td class="businessmodelelement half-height">
+                                            <div data-ng-include src="'modules/team/partial/businessmodel/forms/activities.html'" ></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="businessmodelelement half-height">
+                                            <div data-ng-include src="'modules/team/partial/businessmodel/forms/resources.html'" ></div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td class="twenty businessmodelelement">
+                                <div data-ng-include src="'modules/team/partial/businessmodel/forms/value.html'" ></div>
+                            </td>
+                            <td class="twenty">
+                                <table class="canvas">
+                                    <tr>
+                                        <td class="businessmodelelement">
+                                            <div data-ng-include src="'modules/team/partial/businessmodel/forms/relations.html'" ></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="businessmodelelement">
+                                            <div data-ng-include src="'modules/team/partial/businessmodel/forms/channels.html'" ></div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td class="twenty businessmodelelement">
+                                <div data-ng-include src="'modules/team/partial/businessmodel/forms/jobs.html'" ></div>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="canvas hidden-xs hidden-sm">
+                        <tr>
+                            <td class="halve businessmodelelement">
+                                <div data-ng-include src="'modules/team/partial/businessmodel/forms/costs.html'" ></div>
+                            </td>
+                            <td class="halve businessmodelelement">
+                                <div data-ng-include src="'modules/team/partial/businessmodel/forms/incomes.html'" ></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+        </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- mobile -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card hidden-md hidden-lg" >
+                <div class="card-header bgm-cyan">
+                    <h2>Waardepropositie <small></small></h2>
+                </div>
+                <div class="card-body card-padding">
+                    <div data-ng-include src="'modules/team/partial/businessmodel/forms/value.html'" ></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card hidden-md hidden-lg" >
+                <div class="card-header bgm-cyan">
+                    <h2>Taak die gedaan moet worden <small></small></h2>
+                </div>
+                <div class="card-body card-padding">
+                    <div data-ng-include src="'modules/team/partial/businessmodel/forms/jobs.html'" ></div>
+                </div>
+            </div>
+            <div class="card hidden-md hidden-lg" >
+                <div class="card-header bgm-cyan">
+                    <h2>Relaties <small></small></h2>
+                </div>
+                <div class="card-body card-padding">
+                    <div data-ng-include src="'modules/team/partial/businessmodel/forms/relations.html'" ></div>
+                </div>
+            </div>
+            <div class="card hidden-md hidden-lg" >
+                <div class="card-header bgm-cyan">
+                    <h2>Kanalen <small></small></h2>
+                </div>
+                <div class="card-body card-padding">
+                    <div data-ng-include src="'modules/team/partial/businessmodel/forms/channels.html'" ></div>
+                </div>
+            </div>
+            <div class="card hidden-md hidden-lg" >
+                <div class="card-header bgm-cyan">
+                    <h2>Inkomsten <small></small></h2>
+                </div>
+                <div class="card-body card-padding">
+                    <div data-ng-include src="'modules/team/partial/businessmodel/forms/incomes.html'" ></div>
+                </div>
+            </div>
+            <div class="card hidden-md hidden-lg" >
+                <div class="card-header bgm-cyan">
+                    <h2>Activiteiten <small></small></h2>
+                </div>
+                <div class="card-body card-padding">
+                    <div data-ng-include src="'modules/team/partial/businessmodel/forms/activities.html'" ></div>
+                </div>
+            </div>
+            <div class="card hidden-md hidden-lg" >
+                <div class="card-header bgm-cyan">
+                    <h2>Middelen <small></small></h2>
+                </div>
+                <div class="card-body card-padding">
+                    <div data-ng-include src="'modules/team/partial/businessmodel/forms/resources.html'" ></div>
+                </div>
+            </div>
+            <div class="card hidden-md hidden-lg" >
+                <div class="card-header bgm-cyan">
+                    <h2>Strategische partners <small></small></h2>
+                </div>
+                <div class="card-body card-padding">
+                    <div data-ng-include src="'modules/team/partial/businessmodel/forms/partner.html'" ></div>
+                </div>
+            </div>
+            <div class="card hidden-md hidden-lg" >
+                <div class="card-header bgm-cyan">
+                    <h2>Kosten <small></small></h2>
+                </div>
+                <div class="card-body card-padding">
+                    <div data-ng-include src="'modules/team/partial/businessmodel/forms/costs.html'" ></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- modals -->
+
+    <script type="text/ng-template" id="ModalBusinessModelElementCtrl.html">
+
+        <div class="modal-header">
+            <h3 class="modal-title">{{ element.name }}</h3>
+        </div>
+        <div class="modal-body">
+            <div data-ng-include="'forms/partner.html'"></div>
+
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">Opslaan</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+
+
+
+
+
+</div>
+
+</div>
+</section>
+</section>

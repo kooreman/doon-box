@@ -1,0 +1,641 @@
+<header id="header" data-ng-include src="'includes/header.html'" data-ng-controller="headerCtrl as hctrl"></header>
+
+<section id="main">
+    <aside id="sidebar" data-ng-controller="sideBarCtrl" data-ng-include src="'includes/sidebar-left.html'" data-ng-class="{ 'toggled': app.sidebarToggle.left === true }"></aside>
+
+    <section id="content">
+
+        <div class="container" id="experiment" ng-controller="ExperimentsCtrl">
+            <div class="block-header">
+                <h2><a data-ui-sref="project({teamId: authUser.team, projectId : project.$id})" data-ng-click="app.sidebarStat($event)">{{ project.name }}</a> / Experimenten</h2>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-md-8" >
+
+                    <accordion close-others="oneAtATime">
+
+
+                        <accordion-group is-open="status.openStep1" heading="Stap 1: Uitleg">
+                            <p>
+                                Om zo snel mogelijk een duurzaam, herhaalbaar en schaalbaar businessmodel te kunnen
+                                ontwikkelen ligt de focus op het zo snel mogelijk leren wat wel en wat niet werkt.
+                                Dit doen we door experimenten uit te voeren.
+                            </p>
+                             <p>
+                                 We leren snel en doelgericht door de belangrijkste aannames te identificeren voor de
+                                 huidige fase van de organisatie. Dit zijn aannames die, als ze onwaar blijken te zijn,
+                                 ervoor zorgen dat er een grote verandering doorgevoerd moet worden in het businessmodel.
+                                 Hiermee prioriteren we dus wat we willen leren.
+                            </p>
+                            <h3>Hoe doe je dat?</h3>
+                            <p>
+                            <ol>
+                                <li>Allereerst kijk je naar de waardepropositie en je businessmodel. Realiseer je dat veel
+                                    punten die hier staan aannames zijn. Dat jij bijvoorbeeld een bakkerij wilt beginnen in
+                                    een dorp, betekend nog niet dat klanten er specifiek in dit dorp op zitten te wachten.
+                                    Als jij een nieuwe app wil maken, kan het wel zo zijn dat vergelijkbare apps goed lopen,
+                                    maar dat die van jou toch niet de waarde levert die je dacht.
+                                </li>
+                                <li>
+                                    Een hypothese is een stelling die je maakt in de vorm "Als X gebeurt, dan heeft dat Y als effect".
+                                    Bij een nieuwe auto zou dat kunnen zijn "Als we een auto op kernenergie maken, dan zitten directeuren
+                                    hier op te wachten" of "Als we brood maken met meer suiker, dan stijgt de verkoop aanzienlijk". Hypotheses
+                                    zijn dus stellingen waarvan je kan bewijzen of ze waar of onwaar zijn.
+                                </li>
+                                <li>
+                                    Maak hypotheses voor je waardepropositie en je businessmodel. Voor je waardepropositie kan je dat doen in
+                                    de vorm "Als we product A leveren, dan levert dat pijnstiller B, die de zorg C weghaalt, zodat de klant
+                                    zijn taak D gedaan kan krijgen".
+                                </li>
+                                <li>
+                                    Hypotheses voor je businessmodel kan je maken zoals "Als we product A leveren om bij taak B te helpen, dan
+                                    moeten we dat doen via kanaal C".
+                                </li>
+                                <li>
+                                    Voor elk van de hypotheses bedenk je vervolgens hoe je deze zou willen bewijzen met 1 of meerdere experimenten.
+                                    Denk hierbij aan: Interviews, literatuur onderzoek, a/b test, landing pagina, enquete, via social media, etc.
+                                    Hoe kan je met zo weinig mogelijk moeite, genoeg zekerheid krijgen?
+                                </li>
+                                <li>
+                                    Bepaal hoe je succes van een experiment gaat meten (je metric), bijvoorbeeld door het aantal bezoekers op een
+                                    website te meten. Bepaal wat de huidige waarde is (bijvoorbeeld 100 per dag). Bepaal daarna je doel (zoals: 150 per dag).
+                                </li>
+                                <li>
+                                    Ga nu je experiment maken (als daar werk voor nodig is, bijvoorbeeld het maken van interview vragen).
+                                    Voer het experiment vervolgens uit. Bewerk de huidige waarde door hieronder op het experiment te klikken.
+
+                                </li>
+                                <li>
+                                    Als je genoeg meetresultaten hebt, vink dan aan of het experiment succesvol is geweest of niet. Bepaal daarna zelf
+                                    of met je team of de hypothese geslaagd is. Werk de status bij.
+                                </li>
+                                <li>
+                                    Werk je businessmodel en waardepropositie bij, naar aanleiding van wat je geleerd hebt.
+                                </li>
+                            </ol>
+                            </p>
+
+
+                            <button class="pull-right btn btn-info" data-ng-click="status.openStep1 = false; status.openStep2 = true;">Volgende stap <i class="zmdi zmdi-arrow-right"></i></button>
+                        </accordion-group>
+                        <!--<accordion-group is-open="status.openStep2" heading="Stap 2: Hypotheses waardepropositie">-->
+
+                            <!--<div class="row" data-ng-repeat="hypo in hypoData">-->
+                                <!--<div class="col-xs-10">-->
+                                    <!--Als we-->
+                                    <!--<span class="bg-green">{{ hypo.a }}</span>-->
+                                    <!--leveren, zorgt dat voor-->
+                                    <!--<span class="bg-green">{{ hypo.b }}</span>-->
+                                    <!--waardoor-->
+                                    <!--<span class="bg-green">{{ hypo.c }}</span>-->
+                                    <!--verminderd / versterkt wordt. Zodat de klant-->
+                                    <!--<span class="bg-green">{{ hypo.d }}</span>-->
+                                    <!--kan bereiken / uitvoeren.-->
+
+
+                                <!--</div>-->
+                                <!--<div class="col-xs-2"></div>-->
+                            <!--</div>-->
+
+                            <!--<button class="pull-right btn btn-info" data-ng-click="status.openStep2 = false; status.openStep3 = true;">Volgende stap <i class="zmdi zmdi-arrow-right"></i></button>-->
+                        <!--</accordion-group>-->
+                        <!--<accordion-group is-open="status.openStep3" heading="Stap 3: Hypotheses businessmodel">-->
+
+                            <!--<button class="pull-right btn btn-info" data-ng-click="status.openStep3 = false; status.openStep4 = true;">Volgende stap <i class="zmdi zmdi-arrow-right"></i></button>-->
+                        <!--</accordion-group>-->
+                        <accordion-group is-open="status.openStep2" heading="Stap 2: Hypotheses opstellen">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <form name="hypoAdd" data-ng-submit="addHypothesis(h);h={};">
+
+                                        <h4>Hypothese toevoegen</h4>
+
+
+                                        <p class="c-black f-500 m-b-20">Hypothese</p>
+                                        <div class="form-group fg-float">
+                                            <div class="fg-line">
+                                                <input type="text" class="form-control fg-input" data-ng-model="h.name" >
+                                            </div>
+                                            <label class="fg-label">Hypothese in de vorm 'als P dan Q'</label>
+                                        </div>
+
+                                        <p class="c-black f-500 m-b-20">Prioriteit van de hypothese</p>
+                                        <div class="m-b-15">
+                                            <label>
+                                                <input type="radio" name="priority" data-ng-model="h.priority" value="1"  checked="checked">
+                                                <i class="input-helper"></i>
+                                                Moet bewezen worden (anders valt businessmodel om)
+                                            </label>
+                                        </div>
+                                        <div class="m-b-15">
+                                            <label>
+                                                <input type="radio" name="priority" data-ng-model="h.priority" value="2">
+                                                <i class="input-helper"></i>
+                                                Zou bewezen moeten worden (grote impact op businessmodel)
+                                            </label>
+                                        </div>
+                                        <div class="m-b-15">
+                                            <label>
+                                                <input type="radio" name="priority" data-ng-model="h.priority" value="3">
+                                                <i class="input-helper"></i>
+                                                Zouden we willen bewijzen
+                                            </label>
+                                        </div>
+                                        <div class="m-b-15">
+                                            <label>
+                                                <input type="radio" name="priority" data-ng-model="h.priority" value="4">
+                                                <i class="input-helper"></i>
+                                                Zou leuk zijn om te bewijzen
+                                            </label>
+                                        </div>
+
+
+
+                                        <button type="submit" class="btn btn-primary">Hypothese toevoegen</button>
+                                    </form>
+                                </div>
+                                <div class="col-md-6">
+
+                                    <h4>Onze hypotheses</h4>
+                                    <ul>
+                                        <li data-ng-repeat="h in hypotheses | orderBy:'priority'">
+
+                                            <a href="" data-ng-click="hypothesisModal(h);">
+                                                Prio {{ h.priority }}: {{ h.name }}
+                                            </a> - <a href="" data-ng-click="removeHypothesis(h);" class="btn"><i class="fa fa-trash-o"></i></a>
+                                            <br/>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+
+
+                            <button class="pull-right btn btn-info" data-ng-click="status.openStep2 = false; status.openStep3 = true;">Volgende stap <i class="zmdi zmdi-arrow-right"></i></button>
+                        </accordion-group>
+                        <!--<accordion-group is-open="status.openStep5" heading="Stap 3: Belangrijkste hypotheses kiezen">-->
+
+                            <!--<button class="pull-right btn btn-info" data-ng-click="status.openStep5 = false; status.openStep6 = true;">Volgende stap <i class="zmdi zmdi-arrow-right"></i></button>-->
+                        <!--</accordion-group>-->
+                        <accordion-group is-open="status.openStep3" heading="Stap 3: Experimenten toevoegen">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <form data-ng-submit="addExperiment(hypothesis, e);">
+
+
+                                        <p class="c-black f-500 m-b-20">Titel experiment</p>
+                                        <div class="form-group fg-float">
+                                            <div class="fg-line">
+                                                <input type="text" class="form-control fg-input" data-ng-model="e.name" >
+                                            </div>
+                                            <label class="fg-label">Experiment titel</label>
+                                        </div>
+
+                                        <p class="c-black f-500 m-b-20">Hoort bij hypothese</p>
+                                        <div class="form-group">
+                                            <div class="fg-line">
+                                                <select name="hypothese" ng-model="hypothesis" class="form-control" ng-options="h.name for h in hypotheses"></select>
+                                            </div>
+                                        </div>
+
+                                        <p class="c-black f-500 m-b-20">Metric</p>
+                                        <div class="form-group fg-float">
+                                            <div class="fg-line">
+                                                <input type="text" class="form-control fg-input" data-ng-model="e.metric">
+                                            </div>
+                                            <label class="fg-label">Metric - wat meet je?</label>
+                                        </div>
+
+                                        <p class="c-black f-500 m-b-20">Beginwaarde</p>
+                                        <div class="form-group fg-float">
+                                            <div class="fg-line">
+                                                <input type="text" class="form-control fg-input" data-ng-model="e.startvalue">
+                                            </div>
+                                            <label class="fg-label">Wat is de huidige-/beginwaarde van de metric?</label>
+                                        </div>
+
+                                        <p class="c-black f-500 m-b-20">Doelwaarde</p>
+                                        <div class="form-group fg-float">
+                                            <div class="fg-line">
+                                                <input type="text" class="form-control fg-input" data-ng-model="e.goalvalue">
+                                            </div>
+                                            <label class="fg-label">Wat is de doelwaarde van de metric? (percentage, toename, etc).</label>
+                                        </div>
+
+                                        <p class="c-black f-500 m-b-20">Toelichting / omschrijving</p>
+                                        <div class="form-group">
+                                            <div class="fg-line">
+                                                <textarea class="form-control" data-ng-model="e.descr" rows="5" placeholder="Toelichting of omschrijving"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <button class="btn btn-primary">Experiment toevoegen</button>
+                                    </form>
+
+                                </div>
+                            </div>
+
+
+
+                            <button class="pull-right btn btn-info" data-ng-click="status.openStep3 = false;">Volgende stap <i class="zmdi zmdi-arrow-right"></i></button>
+                        </accordion-group>
+                    </accordion>
+                </div>
+            </div>
+
+            <div class="row hidden-md hidden-lg" >
+                <div class="col-xs-12">
+                    <div class="card">
+                        <div class="card-header bgm-teal">
+                            <h2>Experimenten overzicht <small> Stap voor stap jouw businessmodel valideren</small></h2>
+                        </div>
+
+                        <div class="card-body card-padding">
+                            <div class="col-md-12 thinborder-well" data-ng-repeat="h in hypotheses | orderBy:'priority'">
+                                <div class="row">
+                                    <h4>Hypothese</h4>
+                                    <a href="" data-ng-click="hypothesisModal(h);">
+                                        {{ h.name }} (Prio {{ h.priority }})
+                                    </a> - <a href="" data-ng-click="removeHypothesis(h);" class="btn"><i class="fa fa-trash-o"></i></a>
+                                    <p data-ng-if="h.result == 'success'" class="hypothesis-result-success">
+                                        <br/>
+                                        Hypothese is juist
+                                        <i class="zmdi zmdi-hc-2x zmdi-check"></i>
+                                    </p>
+                                    <p data-ng-if="h.result == 'failed'" class="hypothesis-result-failed">
+                                        <br/>
+                                        Hypothese is onjuist
+                                        <i class="zmdi zmdi-hc-2x zmdi-minus-circle"></i>
+                                    </p>
+                                </div>
+                                <div class="row">
+                                    <h4>Todo</h4>
+                                    <div data-ng-click="experimentModal(e, h);" class="experiment experiment-todo" data-ng-repeat="e in h.experiments | filter:{status:'todo'}">
+                                        <h5>{{ e.name }}</h5>
+                                        <ul>
+                                            <li><i class="zmdi zmdi-center-focus-strong"></i> {{ e.metric }} </li>
+                                            <li><i class="zmdi zmdi-time-interval"></i> {{ e.startvalue }} </li>
+                                            <li><i class="zmdi zmdi-flag"></i> {{ e.goalvalue }} </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <h4>Maken</h4>
+                                    <div data-ng-click="experimentModal(e, h);" class="experiment experiment-create" data-ng-repeat="e in h.experiments | filter:{status:'create'}">
+                                        <h5>{{ e.name }}</h5>
+                                        <ul>
+                                            <li><i class="zmdi zmdi-center-focus-strong"></i> {{ e.metric }} </li>
+                                            <li><i class="zmdi zmdi-time-interval"></i> {{ e.startvalue }} </li>
+                                            <li><i class="zmdi zmdi-flag"></i> {{ e.goalvalue }} </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <h4>Meten</h4>
+                                    <div data-ng-click="experimentModal(e, h);" class="experiment experiment-measure" data-ng-repeat="e in h.experiments | filter:{status:'measure'}">
+                                        <h5>{{ e.name }}</h5>
+                                        <ul>
+                                            <li><i class="zmdi zmdi-center-focus-strong"></i> {{ e.metric }} </li>
+                                            <li><i class="zmdi zmdi-time-interval"></i> {{ e.startvalue }} </li>
+                                            <li><i class="zmdi zmdi-run"></i> {{ e.currentvalue }} </li>
+                                            <li><i class="zmdi zmdi-flag"></i> {{ e.goalvalue }} </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <h4>Resultaten</h4>
+                                    <div data-ng-click="experimentModal(e, h);"
+                                         data-ng-class="{'experiment-result-success': (e.result == 'success'), 'experiment-result-failed': (e.result == 'failed')}"
+                                         class="experiment experiment-result"
+                                         data-ng-repeat="e in h.experiments | filter:{status:'result'}">
+                                        <h5>{{ e.name }}
+                                            <i class="zmdi zmdi-check" data-ng-if="e.result == 'success'"></i>
+                                            <i class="zmdi zmdi-minus-circle" data-ng-if="e.result == 'failed'"></i>
+                                        </h5>
+                                        <ul>
+                                            <li><i class="zmdi zmdi-center-focus-strong"></i> {{ e.metric }} </li>
+                                            <li><i class="zmdi zmdi-time-interval"></i> {{ e.startvalue }} </li>
+                                            <li><i class="zmdi zmdi-run"></i> {{ e.currentvalue }} </li>
+                                            <li><i class="zmdi zmdi-flag"></i> {{ e.goalvalue }} </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row hidden-xs hidden-sm">
+                <div class="col-md-12">
+
+                    <div class="card">
+                        <div class="card-header bgm-teal">
+                            <h2>Experimenten overzicht <small> Stap voor stap jouw businessmodel valideren</small></h2>
+                        </div>
+
+                        <div class="card-body card-padding">
+
+
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Hypothese</th>
+                                        <th>Todo</th>
+                                        <th>Maken</th>
+                                        <th>Meten</th>
+                                        <th>Resultaat</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr data-ng-repeat="h in hypotheses | orderBy:'priority'">
+                                        <td class="col-md-3">
+                                            <a href="" data-ng-click="hypothesisModal(h);">
+                                                {{ h.name }} (Prio {{ h.priority }})
+                                            </a> - <a href="" data-ng-click="removeHypothesis(h);" class="btn"><i class="fa fa-trash-o"></i></a>
+
+                                            <p data-ng-if="h.result == 'success'">
+                                                <br/>
+                                                <br/>
+                                                <i class="zmdi zmdi-hc-5x zmdi-check hypothesis-result-success"></i>
+                                            </p>
+                                            <p data-ng-if="h.result == 'failed'">
+                                                <br/>
+                                                <br/>
+                                                <i class="zmdi zmdi-hc-5x zmdi-minus-circle hypothesis-result-failed"></i>
+                                            </p>
+
+
+                                        </td>
+                                        <td>
+                                            <div data-ng-click="experimentModal(e, h);" class="experiment experiment-todo" data-ng-repeat="e in h.experiments | filter:{status:'todo'}">
+                                                <h5>{{ e.name }}</h5>
+                                                <ul>
+                                                    <li><i class="zmdi zmdi-center-focus-strong"></i> {{ e.metric }} </li>
+                                                    <li><i class="zmdi zmdi-time-interval"></i> {{ e.startvalue }} </li>
+                                                    <li><i class="zmdi zmdi-flag"></i> {{ e.goalvalue }} </li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-ng-click="experimentModal(e, h);" class="experiment experiment-create" data-ng-repeat="e in h.experiments | filter:{status:'create'}">
+                                                <h5>{{ e.name }}</h5>
+                                                <ul>
+                                                    <li><i class="zmdi zmdi-center-focus-strong"></i> {{ e.metric }} </li>
+                                                    <li><i class="zmdi zmdi-time-interval"></i> {{ e.startvalue }} </li>
+                                                    <li><i class="zmdi zmdi-flag"></i> {{ e.goalvalue }} </li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-ng-click="experimentModal(e, h);" class="experiment experiment-measure" data-ng-repeat="e in h.experiments | filter:{status:'measure'}">
+                                                <h5>{{ e.name }}</h5>
+                                                <ul>
+                                                    <li><i class="zmdi zmdi-center-focus-strong"></i> {{ e.metric }} </li>
+                                                    <li><i class="zmdi zmdi-time-interval"></i> {{ e.startvalue }} </li>
+                                                    <li><i class="zmdi zmdi-run"></i> {{ e.currentvalue }} </li>
+                                                    <li><i class="zmdi zmdi-flag"></i> {{ e.goalvalue }} </li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div data-ng-click="experimentModal(e, h);"
+                                                 data-ng-class="{'experiment-result-success': (e.result == 'success'), 'experiment-result-failed': (e.result == 'failed')}"
+                                                 class="experiment experiment-result"
+                                                 data-ng-repeat="e in h.experiments | filter:{status:'result'}">
+                                                <h5>{{ e.name }}
+                                                    <i class="zmdi zmdi-check" data-ng-if="e.result == 'success'"></i>
+                                                    <i class="zmdi zmdi-minus-circle" data-ng-if="e.result == 'failed'"></i>
+                                                </h5>
+                                                <ul>
+                                                    <li><i class="zmdi zmdi-center-focus-strong"></i> {{ e.metric }} </li>
+                                                    <li><i class="zmdi zmdi-time-interval"></i> {{ e.startvalue }} </li>
+                                                    <li><i class="zmdi zmdi-run"></i> {{ e.currentvalue }} </li>
+                                                    <li><i class="zmdi zmdi-flag"></i> {{ e.goalvalue }} </li>
+                                                </ul>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+
+                            </table>
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+
+
+
+<script type="text/ng-template" id="HypothesisModalCtrl.html">
+
+    <div class="modal-header">
+        <h3 class="modal-title">{{ h.name }}</h3>
+    </div>
+    <div class="modal-body">
+        <button class="btn btn-primary pull-right" ng-click="ok(h)">Opslaan en afsluiten</button>
+
+        <form>
+
+
+            <p class="c-black f-500 m-b-20">Hypothese</p>
+            <div class="form-group">
+                <div class="fg-line">
+                    <input type="text" class="form-control fg-input" data-ng-model="h.name" >
+                </div>
+            </div>
+
+
+            <p class="c-black f-500 m-b-20">Status</p>
+            <div class="m-b-15">
+                <label>
+                    <input type="radio" name="result" data-ng-model="h.result" value="open">
+                    <i class="input-helper"></i>
+                    Uitkomst is nog niet bepaald
+                </label>
+            </div>
+            <div class="m-b-15">
+                <label>
+                    <input type="radio" name="result" data-ng-model="h.result" value="success">
+                    <i class="input-helper"></i>
+                    Hypothese is juist
+                </label>
+            </div>
+            <div class="m-b-15">
+                <label>
+                    <input type="radio" name="result" data-ng-model="h.result" value="failed">
+                    <i class="input-helper"></i>
+                    Hypothese is niet juist
+                </label>
+            </div>
+
+
+
+            <p class="c-black f-500 m-b-20">Prioriteit van de hypothese</p>
+            <div class="m-b-15">
+                <label>
+                    <input type="radio" name="priority" data-ng-model="h.priority" value="1"  checked="checked">
+                    <i class="input-helper"></i>
+                    Moet bewezen worden (anders valt businessmodel om)
+                </label>
+            </div>
+            <div class="m-b-15">
+                <label>
+                    <input type="radio" name="priority" data-ng-model="h.priority" value="2">
+                    <i class="input-helper"></i>
+                    Zou bewezen moeten worden (grote impact op businessmodel)
+                </label>
+            </div>
+            <div class="m-b-15">
+                <label>
+                    <input type="radio" name="priority" data-ng-model="h.priority" value="3">
+                    <i class="input-helper"></i>
+                    Zouden we willen bewijzen
+                </label>
+            </div>
+            <div class="m-b-15">
+                <label>
+                    <input type="radio" name="priority" data-ng-model="h.priority" value="4">
+                    <i class="input-helper"></i>
+                    Zou leuk zijn om te bewijzen
+                </label>
+            </div>
+
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok(h)">Opslaan en afsluiten</button>
+
+
+
+
+    </div>
+
+
+
+
+</script>
+
+
+
+<script type="text/ng-template" id="ExperimentModalCtrl.html">
+
+    <div class="modal-header">
+        <h3 class="modal-title">{{ e.name }}</h3>
+    </div>
+    <div class="modal-body">
+        <button class="btn btn-primary pull-right" ng-click="ok(e, h)">Opslaan en afsluiten</button>
+
+        <form>
+            <p class="c-black f-500 m-b-20">Status</p>
+            <div class="form-group">
+                <div class="fg-line">
+                    <select name="hypothese" ng-model="e.status" class="form-control">
+                        <option value='todo'>Todo</option>
+                        <option value='create'>Maken</option>
+                        <option value='measure'>Meten</option>
+                        <option value='result'>Resultaat</option>
+                    </select>
+                </div>
+            </div>
+
+            <div data-ng-if="e.status == 'result'">
+                <p class="c-black f-500 m-b-20">Resultaat</p>
+                <div class="m-b-15">
+                    <label>
+                        <input type="radio" name="result" data-ng-model="e.result" value="open">
+                        <i class="input-helper"></i>
+                        Nog niet bepaald
+                    </label>
+                </div>
+                <div class="m-b-15">
+                    <label>
+                        <input type="radio" name="result" data-ng-model="e.result" value="success">
+                        <i class="input-helper"></i>
+                        Succesvol
+                    </label>
+                </div>
+                <div class="m-b-15">
+                    <label>
+                        <input type="radio" name="result" data-ng-model="e.result" value="failed">
+                        <i class="input-helper"></i>
+                        Niet succesvol
+                    </label>
+                </div>
+            </div>
+
+
+
+            <p class="c-black f-500 m-b-20">Titel experiment</p>
+            <div class="form-group">
+                <div class="fg-line">
+                    <input type="text" class="form-control fg-input" data-ng-model="e.name" >
+                </div>
+            </div>
+
+            <p class="c-black f-500 m-b-20">Hoort bij hypothese</p>
+            <div class="form-group">
+                <div class="fg-line">
+                    {{ h.name }}
+                </div>
+            </div>
+
+            <p class="c-black f-500 m-b-20">Metric</p>
+            <div class="form-group">
+                <div class="fg-line">
+                    <input type="text" class="form-control fg-input" data-ng-model="e.metric">
+                </div>
+            </div>
+
+            <p class="c-black f-500 m-b-20">Beginwaarde</p>
+            <div class="form-group">
+                <div class="fg-line">
+                    <input type="text" class="form-control fg-input" data-ng-model="e.startvalue">
+                </div>
+            </div>
+
+            <p class="c-black f-500 m-b-20">Doelwaarde</p>
+            <div class="form-group">
+                <div class="fg-line">
+                    <input type="text" class="form-control fg-input" data-ng-model="e.goalvalue">
+                </div>
+            </div>
+
+            <p class="c-black f-500 m-b-20">Huidige waarde</p>
+            <div class="form-group">
+                <div class="fg-line">
+                    <input type="text" class="form-control fg-input" data-ng-model="e.currentvalue">
+                </div>
+            </div>
+
+            <p class="c-black f-500 m-b-20">Toelichting / omschrijving</p>
+            <div class="form-group">
+                <div class="fg-line">
+                    <textarea class="form-control" data-ng-model="e.descr" rows="5" placeholder="Toelichting of omschrijving"></textarea>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok(e, h)">Opslaan en afsluiten</button>
+
+        <button class="btn btn-danger pull-left" ng-click="removeExperiment(h, e)">Experiment verwijderen</button>
+
+    </div>
+</script>
+

@@ -1,0 +1,193 @@
+
+<header id="header" data-ng-include src="'includes/header.html'" data-ng-controller="headerCtrl as hctrl"></header>
+
+<section id="main">
+    <aside id="sidebar" data-ng-controller="sideBarCtrl" data-ng-include src="'includes/sidebar-left.html'" data-ng-class="{ 'toggled': app.sidebarToggle.left === true }"></aside>
+
+    <!-- <aside id="chat" data-ng-include src="'includes/chat.html'" data-ng-class="{ 'toggled': app.sidebarToggle.right === true }"></aside> -->
+
+    <section id="content">
+        <div class="container" ng-controller="VisionCtrl">
+            <div class="block-header">
+                <h2><a data-ui-sref="project({teamId: authUser.team, projectId : project.$id})" data-ng-click="app.sidebarStat($event)">{{ project.name }}</a> / Visie</h2>
+            </div>
+
+            <div class="row">
+                <div id="vision" class="col-md-6" >
+
+                    <accordion close-others="oneAtATime">
+                        <accordion-group is-open="status.openStep1" heading="Stap 1: Uitleg" class="">
+                            <p>
+                                In deze stap maak je de visie die hoort bij jouw idee. Jouw visie verteld hoe jij de maatschappij ziet veranderen.
+                            </p>
+
+                            <h3>Hoe stel je je visie op?</h3>
+                            <ol>
+                                <li>Voer hieronder in stap 2 trends die jij ziet in in het kader van jouw idee en jouw doelfocus. Probeer tenminste twee trends categerie te bedenken. Meer is beter. Voor het vak Maatschappij-inzicht (waarden) kan je de tien Trendkaarten gebruiken (uit de DOON Ignition box).</li>
+                                <li>Zoek op internet naar meer trends die horen bij jouw idee en jouw doelfocus. Bij het Maatschappij-inzicht Socialisering kan je bijvoorbeeld Buurtzorg opschrijven.</li>
+                                <li>Kies van alle trends die je opgeplakt hebt, de zeven die jij het belangrijkste vind.  Druk op het vinkje achter de trend (hier rechts in de lijst trends)</li>
+                                <li>Maak van deze zeven trends een beschrijving van jouw visie. Een visie verteld hoe jij de wereld ziet veranderen en waarom. Begin je visie met Ik zie .... Vul jouw visie in in de stap 3</li>
+                            </ol>
+                            <button class="pull-right btn btn-info" data-ng-click="status.openStep1 = false; status.openStep2 = true;">Volgende stap <i class="zmdi zmdi-arrow-right"></i></button>
+
+                        </accordion-group>
+                        <accordion-group is-open="status.openStep2" heading="Stap 2: Trends verkennen">
+
+                            <h3>Trend toevoegen</h3>
+
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="thinborder-well">
+                                        <form>
+                                            <div class="form-group">
+                                                <label for="goalFocus2">Doelfocus</label>
+                                                <div id="goalFocus2" class="well">{{ project.goalFocus }}</div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="idea2">Geselecteerde idee&euml;n</label>
+                                                <div id="idea2" class="well">
+                                                    <ul>
+                                                        <li data-ng-repeat="i in ideas  | filter:{selected:true}">
+                                                            {{ i.name }}
+                                                        </li>
+                                                    </ul>
+
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group fg-float">
+                                                <div class="fg-line">
+                                                    <input type="text" data-ng-model="trend.name" class="form-control fg-input">
+                                                </div>
+                                                <label class="fg-label">Trend die jullie herkennen</label>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="trendCat">Categorie</label>
+                                                <select id="trendCat" name="trendCat" data-ng-model="trend.category" ng-options="cat.key as cat.val for cat in categories" class="form-control" required>
+                                                </select>
+                                            </div>
+
+                                            <div class="checkbox m-b-15">
+                                                <label>
+                                                    <input type="checkbox" data-ng-model="trend.selected" value="true">
+                                                    <i class="input-helper"></i>
+                                                    Hebben jullie deze trend gekozen?
+                                                </label>
+                                            </div>
+
+
+                                            <button type="submit" data-ng-click="addTrend(trend);trend='';" class="btn btn-primary">Trend toevoegen</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="pull-right btn btn-info" data-ng-click="status.openStep2 = false; status.openStep3 = true;">Volgende stap <i class="zmdi zmdi-arrow-right"></i></button>
+
+                        </accordion-group>
+                        <accordion-group is-open="status.openStep3" heading="Stap 3: Visie beschrijven">
+
+                            <h3>Visie opstellen of aanpassen</h3>
+                            <form>
+                                <div class="form-group">
+                                    <label for="goalFocus">Doelfocus</label>
+                                    <div id="goalFocus" class="well">Dit is de focus waarbinnen het idee komt te vallen</div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Geselecteerde idee&euml;n</label>
+                                    <div class="well">
+                                        <ul>
+                                            <li data-ng-repeat="i in ideas  | filter:{selected:true}">
+                                                {{ i.name }}
+                                            </li>
+                                        </ul>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="trendOverview">Belangrijkste trends die jullie gekozen hebben</label>
+                                    <div class="well">
+                                        <ul id="trendOverview" data-ng-repeat="t in trends | filter:{selected:true}">
+                                            <li>{{ t.name }}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="visionInput">Trend</label>
+                                    <textarea class="form-control" id="visionInput" name="vision" ng-model="project.vision" placeholder="Jullie visie"></textarea>
+                                </div>
+
+                                <button type="submit" data-ng-click="saveProject(); status.openStep3 = false;" class="btn btn-primary">Visie opslaan</button>
+                            </form>
+
+
+                        </accordion-group>
+                    </accordion>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header bgm-cyan">
+                                    <h2>Visie <small>Wat zien we in de wereld?</small></h2>
+                                </div>
+
+                                <div class="card-body card-padding">
+                                    <p data-ng-if="project.vision">{{ project.vision }}</p>
+                                    <p data-ng-if="!project.vision"><i>Nog geen visie</i></p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header bgm-pink">
+                                    <h2>Trends <small>Welke ontwikkelingen zien jullie?</small></h2>
+                                </div>
+
+                                <div class="card-body card-padding">
+
+
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Trend</th>
+                                            <th>Gekozen?</th>
+                                            <th>&nbsp;</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr data-ng-repeat="t in trends" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{ getCatName(t.category) }}">
+                                            <td>{{ ($index + 1) }}</td>
+                                            <td>
+                                                {{ t.name }}
+                                            </td>
+                                            <td><i data-ng-if="t.selected" class="fa fa-check"></i></td>
+                                            <td>
+
+                                                <button data-ng-click="selectTrend(t);" class="btn"><i class="fa fa-check"></i></button>
+                                                <button data-ng-click="removeTrend(t);" class="btn"><i class="fa fa-trash-o"></i></button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+</section>

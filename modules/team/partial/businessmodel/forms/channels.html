@@ -1,0 +1,15 @@
+<h4>Kanalen</h4>
+
+<ul>
+    <li data-ng-repeat="c in channels">{{ c.name }}
+        <button data-ng-click="growl(channels.$remove(c));" data-ng-if="editableModel"><i class="fa fa-trash-o"></i></button>
+    </li>
+</ul>
+<form data-ng-if="editableModel">
+    <div class="row">
+        <div class="col-sm-12">
+            <input type="text" class="col-sm-10" data-ng-model="channel.name" placeholder="Nieuw kanaal">
+            <button data-ng-click="growl(channels.$add(channel));channel='';" class="col-sm-2">+</button>
+        </div>
+    </div>
+</form>
